@@ -10,10 +10,6 @@ var define = {
 				apps: 		"https://api.getirkit.com/1/apps",
 				devices: 	"https://api.getirkit.com/1/devices"
       },
-		  // irkit:      		"https://api.getirkit.com/1/messages",
-		  // irkit_clients:  "https://api.getirkit.com/1/clients",
-		  // irkit_apps:     "https://api.getirkit.com/1/apps",
-		  // devices:      	"https://api.getirkit.com/1/devices",
 		  status:{
 		  	account: 	true,
 		  	data: 		true
@@ -24,7 +20,9 @@ var define = {
    	irkitJsDataStore = {};
 
 function initVerifyer(){
-	if(localStorage.email == undefined || localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined) define.status.account = false;
+	if(localStorage.email == undefined || localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined){
+		define.status.account = false;
+	};
 	if(!localStorage.irkitJsData) define.status.data = false;
 }
 
@@ -45,17 +43,16 @@ function buttonListMaker(){
 		buttonArray = JSON.parse(localStorage.getItem("irkitJsData")).buttonDataStore;
 
 		for (var i = 0; i < buttonArray.length; i++) {
-			$("ul.buttonList").prepend('<li data-button-id="'+ buttonArray[i]["buttonId"] +'"><button class="remoteControllers">'+ buttonArray[i]["buttonName"] +'</button></li>');
+			// $("ul.buttonList")
+			// .prepend('<li data-button-id="'+ buttonArray[i]["buttonId"] +'"><button class="remoteControllers">'+ buttonArray[i]["buttonName"] +'</button></li>');
+			$("ul.buttonList").prepend('<li></li>').attr('data-button-id', buttonArray[i]["buttonId"]).inner("<button></button>").addClass('remoteControllers').inner(buttonArray[i]["buttonName"])
 		};
 	}
 }
 
 function addButton(){
-	console.log("addButton is start")
 	$(".addButton").click(function() {
-		console.log("addButton is clicked")
 		appearBottunConsole()
-		console.log("addButton is end")
 	});
 }
 
@@ -69,7 +66,6 @@ function appearBottunConsole(){
 		$("body").prepend('<div class="appearBottunShadow"></div>')
 		$("#contents").append(source).addClass('none').delay(define.a).removeClass('none');
 		addButtonName()
-		// $("#addButtonNameConsole").hide(define.a)
 		console.log("success");
 	})
 	.fail(function() {
@@ -92,13 +88,9 @@ function ajaxGet() {
 		timeout: 1000
 	})
 	.done(function(json) {
-		console.log(json)
 		result = json.message
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
-		console.log(XMLHttpRequest)
-		console.log(textStatus)
-		console.log(errorThrown)
 		console.log("get is error")
 	});
 	console.log("ajaxGet is end")
@@ -106,10 +98,8 @@ function ajaxGet() {
 }
 
 function addButtonName(){
-	console.log("addButtonName is start")
 	$("#addButtonName").click(function() {
 		var addButtonNameTextHtml;
-		console.log("addButtonName is clicked")
 		var addButtonNameBodyVal = $("#addButtonNameBody").val();
 
 		if(addButtonNameBodyVal[0] != undefined){
@@ -122,7 +112,7 @@ function addButtonName(){
 				$(this).remove()
 			});
 		}else{
-			console.log("名前を入れてね")
+			console.log("名前を入れて下さい")
 		}
 		return;
 	});
@@ -156,7 +146,6 @@ function getFromStorage(key){
 }
 
 function getAppsKey(){
-	console.log("getAppsKey is excuted")
 	$('#getAppsKey').click(function(event){
 		$.ajax({
 			url: define.url.apps,
@@ -177,7 +166,6 @@ function getAppsKey(){
 }
 
 function getClientkey(){
-	console.log("getClientkey is excuted")
 	$('#getClientKey').click(function(event) {
 		$.ajax({
 			url: define.url.clients,
@@ -194,7 +182,6 @@ function getClientkey(){
 			ajaxGetPage("init.wifi.html")
 		})
 		.fail(function(e) {
-			console.log(e);
 			console.log("error");
 		})
 		.always(function() {
@@ -204,8 +191,6 @@ function getClientkey(){
 }
 
 function getDeviceId(){
-	console.log("getDeviceId is excuted")
-	console.log(getFromStorage("clientkey"))
 	$.ajax({
 		url: define.url.devices,
 		type: 'POST',
@@ -219,7 +204,6 @@ function getDeviceId(){
 		storeToStorage(e,"deviceid")
 	})
 	.fail(function(e) {
-		console.log(e);
 		console.log("error");
 	})
 	.always(function() {
@@ -228,7 +212,6 @@ function getDeviceId(){
 }
 
 function getWifiSetting(recieve){
-	console.log("getWifiSetting is excuted")
 	$("#wifiSetting").click(function() {
 		$.ajax({
 			url: define.url.clients,
@@ -239,13 +222,9 @@ function getWifiSetting(recieve){
 			},
 		})
 		.done(function(e) {
-			console.log(recieve)
-			console.log(e)
-			
-			// ajaxGetPage("init.serialize.html")
+			console.log("success")
 		})
 		.fail(function(e) {
-			console.log(e);
 			console.log("error");
 		})
 		.always(function() {
@@ -263,20 +242,19 @@ function getSerializeKey(){
 
 		var serialized = keyserializer.serialize({
 		    security  : (function(e){
-				    	switch(e){
-				    		case "0":
-						    	return keyserializer.SECURITY_WPA_WPA2
-				    		case "1":
-						    	return keyserializer.SECURITY_WEP
-				    		case "2":
-						    	return keyserializer.SECURITY_NONE
-				    	}
+		    	switch(e){
+		    		case "0":
+				    	return keyserializer.SECURITY_WPA_WPA2
+		    		case "1":
+				    	return keyserializer.SECURITY_WEP
+		    		case "2":
+				    	return keyserializer.SECURITY_NONE
+		    	}
 		    })(getFromStorage("securityType")),
 		    ssid      : getFromStorage("ssid"),
 		    password  : getFromStorage("password"),
 		    devicekey : getFromStorage("devicekey")
 		});
-		console.log(serialized)
 		postSerializeKey(serialized)
 		ajaxGetPage("init.thanks.html")
 		ajaxLinkClick()
@@ -317,43 +295,14 @@ function ajaxPost(e){
 		timeout: 1000
 	})
 	.done(function(json) {
-		console.log("信号送信に成功しました");
+		console.log("success");
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log(XMLHttpRequest);
 	});
 }
 
-function ajaxGetPageInit(){
-	if(define.status.account == false){
-		targetUrl = "init.mail.html"
-		// targetUrl = "init.clientkey.html"
-		// targetUrl = "init.wifi.html"
-		// targetUrl = "init.serialize.html"
-		// targetUrl = "init.thanks.html"
-		$("body").addClass('initialize')
-		$("nav").addClass('disabled')
-	}else{
-		targetUrl = "home.html"
-		// targetUrl = "others.html"
-	}
-	$.ajax({
-		url: targetUrl,
-		type: 'GET',
-		dataType: 'html'
-	})
-	.done(function(e) {
-		$("#contents").prepend(e)
-		getAppsKey();
-		initContentHeight()
-		buttonListMaker()
-		addButton();
-		tapButton();
-	})
-}
-
 function ajaxLinkClick(){
-	console.log("ajaxLinkClick is available")
 	$("a").click(function(e) {
 		ajaxGetPage($(this).attr('href'))
 		return false;
@@ -418,13 +367,34 @@ function selectVisualControll(){
 	});
 }
 
-$(window).load(function() {
+function ajaxGetPageInit(){
 	initVerifyer();
-	ajaxGetPageInit();
 	ajaxLinkClick();
-	console.log(getFromStorage("irkitJsData"))
-});
 
-$(window).resize(function() {
-	// buttonListHeightAverager();
+	if(define.status.account == false){
+		if(localStorage.email == undefined) targetUrl = "init.mail.html"
+		if(localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined) targetUrl = "init.clientkey.html"
+		if(localStorage.securityType == undefined || localStorage.ssid == undefined || localStorage.password == undefined || localStorage.devicekey == undefined) targetUrl = "init.serialize.html"
+		$("body").addClass('initialize')
+		$("nav").addClass('disabled')
+	}else{
+		targetUrl = "home.html"
+	}
+	$.ajax({
+		url: targetUrl,
+		type: 'GET',
+		dataType: 'html'
+	})
+	.done(function(e) {
+		$("#contents").prepend(e)
+		getAppsKey();
+		initContentHeight()
+		buttonListMaker()
+		addButton();
+		tapButton();
+	})
+}
+
+$(window).load(function() {
+	ajaxGetPageInit();
 });
