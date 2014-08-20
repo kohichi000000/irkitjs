@@ -1,0 +1,29 @@
+!!!
+%html{"ng-app" => true}
+	%head
+		%meta{:charset => "UTF-8"}/
+		%meta{:content => 'width=device-width,user-scalable=no',:name=>'viewport'}
+		%link{:rel => "stylesheet", :href => "style.css"}/
+		%link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Pacifico"}/
+		%script{:src => "//code.jquery.com/jquery-1.11.0.min.js"}
+		%script{:src => "js/min/keyserializer.min.js"}
+		%script{:src => "js/min/functions.min.js"}
+		%script{:src => "js/min/analytics.min.js"}
+
+		%title IRKit-js
+		= Haml::Engine.new(File.read(File.dirname(__FILE__)+'/_meta.haml')).render
+	%body{"ng-app" => "App"}
+		%header
+			%h1.logo<
+				IRkit-js
+		%nav
+			%ul
+				-(1..$nav.count).each do |x|
+					%li<
+						-if(x == 2)
+							%button{:class => "#{$nav[x-1][1]} addButton"} #{$nav[x-1][0]}
+						-else
+							%a{:href => "#{$nav[x-1][1]}.html", :class => "#{$nav[x-1][1]}"}<
+								#{$nav[x-1][0]}
+		#contents
+			/コンテンツの中身

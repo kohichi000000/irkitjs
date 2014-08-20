@@ -1,0 +1,62 @@
+body
+	&.initialize
+		background-color: $weakC
+		// background-image: url("http://photos-a.ak.instagram.com/hphotos-ak-xaf1/10598511_698709546882144_368999775_n.jpg")
+		// background-size: cover
+		header
+			.logo
+				font-size: 36px
+				padding: 14px 0 16px 0
+section
+	&.initialize
+		padding: 0 50px
+		#contents &
+			height: auto
+			+box-shadow(none)
+		p,input,button,#selectVisual
+			margin-bottom: 10px
+		a.button
+			display: block
+			text-decoration: none
+			padding: 10px
+			text-align: center
+			background-color: $baseC
+			color: #fff
+		button, a.button
+			margin-top: 20px
+			&:focus, &:hover
+				background-color: $mainC
+				outline: none
+				+anim($anim * 2)
+				+keyFramesAttr(MaxToMin,$anim * 2,1)
+		#selection
+			position: relative
+			height: 50px
+			#selectVisual, select
+				position: absolute
+				top: 0
+			#selectVisual
+				background-color: #FFF
+				width: 100%
+				padding: 10px
+				z-index: 0
+				font-size: 11px
+				color: $baseC
+				+icoMoon("\e90d")
+				&:after
+					position: absolute
+					top: 50%
+					right: 0
+					margin-top: -10px
+					font-size: 20px
+			select
+				z-index: 1
+				+opc(0)
++keyframes(MaxToMin)
+	0%
+		+scale(1)
+		+opc(100)
+	80%
+		+scale(1.1)
+	100%
+		+opc(50)

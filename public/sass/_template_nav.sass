@@ -1,0 +1,35 @@
+nav
+	position: fixed
+	bottom: 0
+	width: 100%
+	&.disabled
+		display: none
+	ul
+		+clear
+		li
+			width: 33%
+			float: left
+			border-right: 1px solid $baseC_W
+			&:last-child
+				border-right: none
+			a,button
+				background-color: $baseC
+				display: block
+				text-decoration: none
+				color: #fff
+				padding: 12px 0 10px 0
+				font-size: 10px
+				text-align: center
+				+icoMoonB("\e865")
+				&.index:before
+					font-size: 18px
+					margin-top: 2px
+				&.add:before
+					content: "\e8c3"
+				&.others:before
+					content: "\e921"
+				&:before
+					font-size: 20px
+					margin-bottom: 2px
+				&:visited
+					color: #fff

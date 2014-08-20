@@ -1,0 +1,17 @@
+<section class='initialize'>
+  <p>ご自宅のWi-Fiルータのセキュリティ・SSID・パスワードを入力して下さい。</p>
+  <span>セキュリティ</span>
+  <div id='selection'>
+    <div id='selectVisual'></div>
+    <select id='getSecurityType' name='getSecurityType'>
+      <option value='0'>WPA_WPA2</option>
+      <option value='1'>WEP</option>
+      <option value='2'>NONE</option>
+    </select>
+  </div>
+  <span>SSID</span>
+  <input id='getSsid' placeholder='SSID' type='text'>
+  <span>パスワード</span>
+  <input id='getPassword' placeholder='パスワード' type='password'>
+  <button id='getSerializedKey' type='button'>決定</button>
+</section>

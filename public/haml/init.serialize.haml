@@ -1,0 +1,18 @@
+%section.initialize
+	%p<
+		ご自宅のWi-Fiルータのセキュリティ・SSID・パスワードを入力して下さい。
+	%span<
+		セキュリティ
+	#selection
+		#selectVisual
+		%select{:name => "getSecurityType", :id => "getSecurityType"}
+			%option{:value => "0"} WPA_WPA2
+			%option{:value => "1"} WEP
+			%option{:value => "2"} NONE
+	%span<
+		SSID
+	%input{:type => "text", :id => "getSsid", :placeholder=>"SSID"}/
+	%span<
+		パスワード
+	%input{:type => "password", :id => "getPassword", :placeholder=>"パスワード"}/
+	%button{:type => "button", :id => "getSerializedKey"} 決定

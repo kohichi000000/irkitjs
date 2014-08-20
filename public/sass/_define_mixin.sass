@@ -1,0 +1,171 @@
+//カラーマネジメント
+
+$baseC: #334
+$baseC_W: #667
+$weakC: #f0f0f0
+$weakC_S: #bbc
+$mainC: #00a8ff
+$mainC_W: $mainC + #999
+$subG_C: #2c9b32
+$subG_C_W: $subG_C + #999
+$subB_C: #00a6e5
+$subB_C_W: $subB_C + #999
+
+
+//レイアウトマネジメント
+
+$width: 984px
+$mainWidth: 714px
+$subWidth: 250px
+$break_tablet: 784px
+$break_phone: 480px
+
+//その他
+
+$fontfamily: "ヒラギノ角ゴ Pro W5", "メイリオ", Meiryo, "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif, "ＭＳ Ｐゴシック", "MS Pゴシック", Osaka
+$font: 12px
+$anim: 0.3s
+
+=clear
+  zoom: 1
+  min-height: 1%
+  &:after
+    content: "."
+    display: block
+    height: 0
+    font-size: 0
+    clear: both
+    visibility: hidden
+
+=opc($opc)
+  opacity: $opc / 100
+  filter: alpha(opacity=$opc)
+  -ms-filter: "alpha(opacity="+$opc+")"
+
+=reset
+  font-size: $font
+  color: $baseC
+  font-family: $fontfamily
+  background-color: transparent
+  font-weight: normal
+  border: none
+  padding: 0
+  margin: 0
+
+=anim($sec)
+  -webkit-transition: $sec
+  -moz-transition: $sec
+  -ms-transition: $sec
+  -o-transition: $sec
+  transition: $sec
+
+=floatL
+  float: left
+  @media screen and(max-width: $break_phone)
+    float: none
+
+=floatR
+  float: right
+  @media screen and(max-width: $break_phone)
+    float: none
+
+=width($widthThis)
+  width: $widthThis
+  @media screen and(max-width: $break_phone)
+    width: 100%
+
+=media
+  @media screen and(max-width: $break_phone)
+    width: 100%
+
+=icoMoon($font)
+  text-decoration: none
+  &:after
+    display: block
+    font-weight: normal
+    font-family: "icomoon"
+    content: $font
+    line-height: 1
+    text-align: center
+    &:hover
+      content: $font + " "
+
+=icoMoonB($font)
+  text-decoration: none
+  &:before
+    display: block
+    font-weight: normal
+    font-family: "icomoon"
+    content: $font
+    line-height: 1
+    text-align: center
+    &:hover
+      content: $font + " "
+
+=last
+  &:last-child
+    margin: 0
+    border: none
+    padding: 0
+
+=button
+  color: $mainC
+  background-color: #fff
+  line-height: 1
+  padding: 6px 22px
+  border: 1px $mainC solid
+  text-decoration: none
+  font-family: $fontfamily
+  +inline-block
+  +border-radius(3px)
+  &:hover
+    +anim($anim)
+    background-color: $mainC
+    color: #fff
+
+=after($p-left,$left)
+  position: relative
+  padding-left: $p-left
+  &:after
+    content: ""
+    display: block
+    position: absolute
+    top: 0
+    left: $left
+
+=rotate($angle)
+  -webkit-transform: rotate($angle)
+  -moz-transform: rotate($angle)
+  -ms-transform: rotate($angle)
+  -o-transform: rotate($angle)
+  transform: rotate($angle)
+
+=scale($size)
+  -webkit-transform: scale($size)
+  -moz-transform: scale($size)
+  -ms-transform: scale($size)
+  -o-transform: scale($size)
+  transform: scale($size)
+
+=translate3d($x,$y,$z)
+  -webkit-transform: translate3d($x,$y,$z)
+  -moz-transform: translate3d($x,$y,$z)
+  -ms-transform: translate3d($x,$y,$z)
+  -o-transform: translate3d($x,$y,$z)
+  transform: translate3d($x,$y,$z)
+
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=keyFramesAttr($name,$sec,$infinite)
+  -webkit-animation: $name $sec $infinite
+  -moz-animation: $name $sec $infinite
+  -o-animation: $name $sec $infinite
+  animation: $name $sec $infinite

@@ -1,0 +1,35 @@
+button
+	&.remoteControllers
+		background-color: #FFF
+		+background-image(linear-gradient(to bottom, white, #f9f9f9))
+		color: $baseC_W
+		display: block
+		line-height: 1
+		height: 100%
+		padding: 20px
+		text-align: left
+		font-size: 12px
+		&.addButton
+			background-color: $weakC
+			color: $weakC_S
+	.initialize &
+		background-color: $baseC
+		color: #fff
+		+border-radius(3px)
+a.button
+	display: block
+	text-decoration: none
+	padding: 10px
+	text-align: center
+	background-color: $baseC
+	color: #fff
+.initialize button, button.button, a.button
+	background-color: $baseC
+	color: #fff
+	margin-top: 20px
+	+border-radius(3px)
+	&:focus, &:hover
+		background-color: $mainC
+		outline: none
+		+anim($anim * 2)
+		+keyFramesAttr(MaxToMin,$anim * 2,1)

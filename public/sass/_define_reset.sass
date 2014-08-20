@@ -1,0 +1,113 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video
+	margin: 0
+	padding: 0
+	border: 0
+	outline: 0
+	font-size: 100%
+	vertical-align: baseline
+	background: transparent
+
+body
+	line-height: 1
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+	display: block
+
+nav ul
+	list-style: none
+
+blockquote, q
+	quotes: none
+
+blockquote
+	&:before, &:after
+		content: ''
+		content: none
+
+q
+	&:before, &:after
+		content: ''
+		content: none
+
+a
+	margin: 0
+	padding: 0
+	font-size: 100%
+	vertical-align: baseline
+	background: transparent
+
+ins
+	background-color: #ff9
+	color: #000
+	text-decoration: none
+
+mark
+	background-color: #ff9
+	color: #000
+	font-style: italic
+	font-weight: bold
+
+del
+	text-decoration: line-through
+
+abbr[title], dfn[title]
+	border-bottom: 1px dotted
+	cursor: help
+
+table
+	border-collapse: collapse
+	border-spacing: 0
+
+hr
+	display: block
+	height: 1px
+	border: 0
+	border-top: 1px solid #cccccc
+	margin: 1em 0
+	padding: 0
+
+input, select, button, textarea
+	vertical-align: middle
+	border: none
+	padding: 10px
+	+width(100%)
+	+box-sizing(border-box)
+
+ul li
+	list-style-type: none
+
+*
+	margin: 0
+	padding: 0
+	+box-sizing(border-box)
+
+a
+	color: $mainC
+	text-decoration: underline
+	&:visited
+		color: $mainC_W
+	&:hover
+		text-decoration: none
+img
+	border: none
+	max-width: 100%
+	height: auto
+
+
+a img:hover
+	+opc(50)
+	+anim($anim)
+a img.opc:hover
+	+opc(100)
+	+anim($anim)
+body
+	+reset
+	font-size: 12px
+	line-height: 1.5
+
+@for $i from 1 through 6
+	h#{$i}
+		font-weight: normal
+		color: $mainC
+		font-size: 14px
+		line-height: 1
