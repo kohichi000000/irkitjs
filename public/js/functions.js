@@ -43,15 +43,14 @@ function buttonListMaker(){
 		buttonArray = JSON.parse(localStorage.getItem("irkitJsData")).buttonDataStore;
 
 		for (var i = 0; i < buttonArray.length; i++) {
-			// $("ul.buttonList")
-			// .prepend('<li data-button-id="'+ buttonArray[i]["buttonId"] +'"><button class="remoteControllers">'+ buttonArray[i]["buttonName"] +'</button></li>');
-			$("ul.buttonList").prepend('<li></li>').attr('data-button-id', buttonArray[i]["buttonId"]).inner("<button></button>").addClass('remoteControllers').inner(buttonArray[i]["buttonName"])
+			$("ul.buttonList")
+			.prepend('<li data-button-id="'+ buttonArray[i]["buttonId"] +'"><button class="remoteControllers">'+ buttonArray[i]["buttonName"] +'</button><div class="delete subButton"></div><div class="edit subButton"></div><div class="sortUp subButton"></div><div class="sortDown subButton"></div></li>');
 		};
 	}
 }
 
 function addButton(){
-	$(".addButton").click(function() {
+	$(".addButton").click(function(){
 		appearBottunConsole()
 	});
 }
@@ -63,14 +62,16 @@ function appearBottunConsole(){
 		dataType: 'html'
 	})
 	.done(function(source) {
-		$("body").prepend('<div class="appearBottunShadow"></div>')
+		$("body").prepend('<div class="appearButtonShadow"></div>')
 		$("#contents").append(source).addClass('none').delay(define.a).removeClass('none');
 		addButtonName()
-		console.log("success");
 	})
 	.fail(function() {
 		console.log("error");
 	})
+	// .complete(function(){
+	// 	
+	// })
 }
 
 function ajaxGet() {
@@ -88,18 +89,17 @@ function ajaxGet() {
 		timeout: 1000
 	})
 	.done(function(json) {
-		result = json.message
+		// addButtonName(json.message)
+		return json.message
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
-	console.log("ajaxGet is end")
-	return result;
 }
 
 function addButtonName(){
 	$("#addButtonName").click(function() {
-		var addButtonNameTextHtml;
+		// var addButtonNameTextHtml;
 		var addButtonNameBodyVal = $("#addButtonNameBody").val();
 
 		if(addButtonNameBodyVal[0] != undefined){
@@ -108,7 +108,7 @@ function addButtonName(){
 			$("#addButtonNameConsole").hide(0, function() {
 				$(this).remove()
 			});
-			$(".appearBottunShadow").hide(0, function() {
+			$(".appearButtonShadow").hide(0, function() {
 				$(this).remove()
 			});
 		}else{
@@ -131,6 +131,8 @@ function storeNewButton(button){
 	localStorage.setItem("irkitJsData" , JSON.stringify(irkitJsDataStore));
 
 	$("ul.buttonList").prepend('<li data-button-id="'+ buttonObj.buttonId + '"><button class="remoteControllers">'+ buttonObj.buttonName +'</button></li>');
+	tapButton();
+	tabSubButton();
 }
 
 function storeToStorage(e,key){
@@ -143,6 +145,10 @@ function storeToStorageSimple(e,key){
 
 function getFromStorage(key){
 	return JSON.parse(localStorage.getItem(key))
+}
+
+function deleteFromStorage(key){
+	return JSON.parse(localStorage.removeItem(key))
 }
 
 function getAppsKey(){
@@ -302,6 +308,48 @@ function ajaxPost(e){
 	});
 }
 
+function tabSubButton(){
+	$(".subButton").click(function() {
+		switch($(this).attr('class')){
+			case "delete subButton":
+				tabSubButtonDelete(this)
+				break;
+			case "edit subButton":
+				tabSubButtonEdit(this)
+				break;
+			case "sortUp subButton":
+				tabSubButtonSortUp(this)
+				break;
+			case "sortDown subButton":
+				tabSubButtonSortDown(this)
+				break;
+		}
+	});
+}
+
+function tabSubButtonDelete(dom){
+	buttonArray = getFromStorage("irkitJsData").buttonDataStore;
+	targetId = getFromStorage("irkitJsData").buttonDataStore[$(dom).parent("li").attr("data-button-id")]["buttonId"];
+
+	buttonArray.splice(targetId,1)
+	localStorage.removeItem("irkitJsData")
+	storeToStorageSimple("irkitJsData",buttonArray)
+	buttonListMaker()
+}
+
+function tabSubButtonEdit(dom){
+
+}
+
+function tabSubButtonSortUp(dom){
+
+}
+
+function tabSubButtonSortDown(dom){
+
+}
+
+
 function ajaxLinkClick(){
 	$("a").click(function(e) {
 		ajaxGetPage($(this).attr('href'))
@@ -345,6 +393,8 @@ function ajaxGetPage(link){
 				}else if(checkUrl == "init.wifi.html"){
 					getWifiSetting();
 					ajaxLinkClick();
+				}else if(checkUrl == "init.thanks.html"){
+					ajaxLinkClick();
 				}
 		})
 	})
@@ -372,9 +422,13 @@ function ajaxGetPageInit(){
 	ajaxLinkClick();
 
 	if(define.status.account == false){
-		if(localStorage.email == undefined) targetUrl = "init.mail.html"
-		if(localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined) targetUrl = "init.clientkey.html"
-		if(localStorage.securityType == undefined || localStorage.ssid == undefined || localStorage.password == undefined || localStorage.devicekey == undefined) targetUrl = "init.serialize.html"
+		if(localStorage.email == undefined){
+			targetUrl = "init.mail.html"
+		}else if(localStorage.clientkey == undefined && localStorage.deviceid == undefined && localStorage.devicekey == undefined){
+			targetUrl = "init.clientkey.html"
+		}else if(localStorage.securityType == undefined && localStorage.ssid == undefined && localStorage.password == undefined && localStorage.devicekey == undefined){
+			targetUrl = "init.serialize.html"
+		}
 		$("body").addClass('initialize')
 		$("nav").addClass('disabled')
 	}else{
@@ -392,6 +446,7 @@ function ajaxGetPageInit(){
 		buttonListMaker()
 		addButton();
 		tapButton();
+		tabSubButton();
 	})
 }
 

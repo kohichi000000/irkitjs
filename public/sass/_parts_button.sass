@@ -33,3 +33,39 @@ a.button
 		outline: none
 		+anim($anim * 2)
 		+keyFramesAttr(MaxToMin,$anim * 2,1)
+ul.buttonList
+	li
+		position: relative
+		z-index: 1
+.subButton
+	position: absolute
+	top: 0
+	z-index: 10
+	width: 52px
+	height: 100%
+	background-color: #aaa
+	+icoMoon("\e6fd")
+	&:after
+		font-size: 14px
+		margin-top: 20px
+		color: #fff
+	&.delete
+		right: 52px
+		background-color: #d30
+		&:after
+			content: "\e6fd"
+	&.edit
+		right: 0
+		background-color: #9c6
+		&:after
+			content: "\e605"
+	&.sortUp
+		left: 0
+		background-color: #55C3B8
+		&:after
+			content: "\e720"
+	&.sortDown
+		left: 52px
+		background-color: #55C3B8
+		&:after
+			content: "\e724"
