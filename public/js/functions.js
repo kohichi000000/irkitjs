@@ -334,9 +334,11 @@ function tabSubButtonDelete(dom){
 	buttonArray.splice(targetId,1)
 	localStorage.removeItem("irkitJsData")
 
-	irkitJsDataSotre["buttonDataStore"] = buttonArray
+	irkitJsDataSotre = {
+		buttonDataStore : buttonArray
+	}
 
-	storeToStorageSimple("irkitJsData",irkitJsDataSotre)
+	storeToStorageSimple(irkitJsDataSotre, "irkitJsData")
 	buttonListMaker()
 }
 
