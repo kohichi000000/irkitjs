@@ -329,11 +329,14 @@ function tabSubButton(){
 
 function tabSubButtonDelete(dom){
 	buttonArray = getFromStorage("irkitJsData").buttonDataStore;
-	targetId = getFromStorage("irkitJsData").buttonDataStore[$(dom).parent("li").attr("data-button-id")]["buttonId"];
+	targetId 		= getFromStorage("irkitJsData").buttonDataStore[$(dom).parent("li").attr("data-button-id")]["buttonId"];
 
 	buttonArray.splice(targetId,1)
 	localStorage.removeItem("irkitJsData")
-	storeToStorageSimple("irkitJsData",buttonArray)
+
+	irkitJsDataSotre["buttonDataStore"] = buttonArray
+
+	storeToStorageSimple("irkitJsData",irkitJsDataSotre)
 	buttonListMaker()
 }
 
@@ -347,6 +350,13 @@ function tabSubButtonSortUp(dom){
 
 function tabSubButtonSortDown(dom){
 
+}
+
+function dataInitialize(){
+	$(".clear").click(function() {
+		localStorage.clear();
+		return false;
+	});
 }
 
 
@@ -447,6 +457,7 @@ function ajaxGetPageInit(){
 		addButton();
 		tapButton();
 		tabSubButton();
+		dataInitialize();
 	})
 }
 

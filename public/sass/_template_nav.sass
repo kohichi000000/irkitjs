@@ -7,7 +7,8 @@ nav
 	ul
 		+clear
 		li
-			width: 33%
+			width: 25%
+			// width: 33%
 			float: left
 			border-right: 1px solid $baseC_W
 			&:last-child
@@ -20,6 +21,7 @@ nav
 				padding: 12px 0 10px 0
 				font-size: 10px
 				text-align: center
+				height: 60px
 				+icoMoonB("\e865")
 				&.index:before
 					font-size: 18px
@@ -28,6 +30,9 @@ nav
 					content: "\e8c3"
 				&.others:before
 					content: "\e921"
+				&.clear:before
+					content: "\e6fd"
+					font-size: 14px
 				&:before
 					font-size: 20px
 					margin-bottom: 2px
