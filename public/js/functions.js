@@ -17,7 +17,6 @@ function initContentHeight(){
 	}
 }
 
-
 function addButton(){
 	$(".addButton").click(function(){
 		appearBottunConsole()
