@@ -37,36 +37,43 @@ ul.buttonList
 	li
 		// position: relative
 		z-index: 1
+		button
+			z-index: 10
+			position: relative
 .subButton
 	position: absolute
 	top: 0
-	z-index: 10
+	z-index: 1
 	width: 52px
 	height: 100%
 	background-color: #aaa
-	+opc(50)
 	+icoMoon("\e6fd")
 	&:after
 		font-size: 14px
 		margin-top: 20px
 		color: #fff
+	&.active
+		&.delete
+			background-color: #d30
+		&.edit
+			background-color: #9c6
+		&.sortUp
+			background-color: #55C3B8
+		&.sortDown
+			background-color: #55C3B8
 	&.delete
 		right: 52px
-		background-color: #d30
 		&:after
 			content: "\e6fd"
 	&.edit
 		right: 0
-		background-color: #9c6
 		&:after
 			content: "\e605"
 	&.sortUp
 		left: 0
-		background-color: #55C3B8
 		&:after
 			content: "\e720"
 	&.sortDown
 		left: 52px
-		background-color: #55C3B8
 		&:after
 			content: "\e724"

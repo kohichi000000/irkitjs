@@ -84,6 +84,8 @@ function initFunction(){
   tapButton();
   tabSubButton();
   dataInitialize();
+  controllerSwiper()
+  // controllerSwiper();
 }
 
 function registerFunction(){
