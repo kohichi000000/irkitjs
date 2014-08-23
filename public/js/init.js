@@ -51,13 +51,29 @@ function buttonListMaker(){
       localStorage.removeItem("irkitJsData");
       storeToStorageSimple(newButtonArray,"irkitJsData")
     }
+    buttonListPosition()
   }
 }
 
-// function buttonIdSort(array,i){
-//   array[i].buttonId = i
-//   localStorage.setItem("irkitJsData" , JSON.stringify(e[key]));
-// }
+function buttonListPosition(){
+  buttonListArray       = $("ul.buttonList").children('li')
+  buttonListArrayHeight = buttonListArray.height()
+
+  for (var i = 0; i < buttonListArray.length; i++) {
+    $(buttonListArray[i]).animate({"top": buttonListArrayHeight * i}, 0)
+  };
+}
+
+function buttonIdSort(array){
+  array.sort(
+    function(a,b){
+      if( a.buttonId < b.buttonId ) return -1;
+      if( a.buttonId > b.buttonId ) return 1;
+      return 0;
+    }
+  );
+  return array
+}
 
 function initFunction(){
   getAppsKey();
