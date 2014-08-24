@@ -3,8 +3,8 @@ var define = {
       h: function(){ return $(window).height() },
       s: function(){ return $(document).scrollTop() },
       b: 480,
-      a: 1000,
-      // a: 200,
+      // a: 1000,
+      a: 200,
       url:{
       	messages: "https://api.getirkit.com/1/messages",
 				clients: 	"https://api.getirkit.com/1/clients",
@@ -82,10 +82,8 @@ function initFunction(){
   buttonListMaker()
   addButton();
   tapButton();
-  tabSubButton();
   dataInitialize();
   controllerSwiper()
-  // controllerSwiper();
 }
 
 function registerFunction(){

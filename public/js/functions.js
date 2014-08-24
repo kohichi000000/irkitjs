@@ -94,9 +94,9 @@ function storeNewButton(button){
 
 	localStorage.setItem("irkitJsData" , JSON.stringify(buttonArray));
 
-	$("ul.buttonList").prepend('<li data-button-id="'+ buttonObj.buttonId + '"><button class="remoteControllers">'+ buttonObj.buttonName +'</button><div class="delete subButton"></div><div class="edit subButton"></div><div class="sortUp subButton"></div><div class="sortDown subButton"></div></li>');
-	tapButton();
-	tabSubButton();
+	// $("ul.buttonList").prepend('<li data-button-id="'+ buttonObj.buttonId + '"><button class="remoteControllers">'+ buttonObj.buttonName +'</button><div class="delete subButton"></div><div class="edit subButton"></div><div class="sortUp subButton"></div><div class="sortDown subButton"></div></li>');
+	$("ul.buttonList").children('li').remove()
+	initFunction()
 }
 
 function storeToStorage(e,key){
@@ -115,34 +115,6 @@ function deleteFromStorage(key){
 	return JSON.parse(localStorage.removeItem(key))
 }
 
-function tapButton(){
-	$(".remoteControllers").click(function(e) {
-		ajaxPost(getFromStorage("irkitJsData").buttonDataStore[$(this).parent().attr('data-button-id')]["buttonData"])
-	});
-}
-
-function ajaxPost(e){
-	$.ajax({
-		type: "POST",
-		url: define.url.messages,
-		data: {
-			clientkey: getFromStorage("clientkey"),
-			deviceid: getFromStorage("deviceid"),
-			message: JSON.stringify(e)
-		},
-		cache: false,
-		timeout: 1000
-	})
-	.done(function(json) {
-		console.log("success");
-	})
-	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
-		console.log(XMLHttpRequest);
-	});
-}
-
-
-
 function dataInitialize(){
 	$(".clear").click(function() {
 		localStorage.clear();
@@ -152,42 +124,48 @@ function dataInitialize(){
 
 function ajaxLinkClick(){
 	$("a").click(function(e) {
-		ajaxGetPage($(this).attr('href'))
+		ajaxGetPage($(this).attr('href'), $(this).hasClass('outerLink'))
 		return false;
 	});
 }
 
-function ajaxGetPage(link){
-	$.ajax({
-		url: link,
-		type: 'GET',
-		dataType: 'html'
-	})
-	.done(function(e) {
-		checkUrl = this.url
-		$("#contents").children().animate({
-			"margin-left": "-50%",
-			"opacity": "0"},
-			define.a,
-			function(){
-				$(this).remove();
-				$("#contents").prepend(e)
-				initFunction();
-				$("#contents").children().css({
-					"margin-left": '50%',
-					"opacity": '0'
-				}).animate({
-					"margin-left": '0',
-					"opacity": '1'
-				},define.a,function(){
-				})
-				if(checkUrl == "home.html"){
-					initFunction()
-				}else if(checkUrl.match(/init./)){
-					registerFunction()
-				}
+function ajaxGetPage(link, outerLink){
+	console.log(outerLink)
+	if(!outerLink){	
+		$.ajax({
+			url: link,
+			type: 'GET',
+			dataType: 'html'
 		})
-	})
+		.done(function(e) {
+			checkUrl = this.url
+			$("#contents").children().animate({
+				"margin-left": "-50%",
+				"opacity": "0"},
+				define.a,
+				function(){
+					$(this).remove();
+					$("#contents").prepend(e)
+					initFunction();
+					$("#contents").children().css({
+						"margin-left": '50%',
+						"opacity": '0'
+					}).animate({
+						"margin-left": '0',
+						"opacity": '1'
+					},define.a,function(){
+					})
+					if(checkUrl == "home.html"){
+						// initFunction()
+					}else if(checkUrl.match(/init./)){
+						registerFunction()
+					}
+			})
+		})
+	}else{
+		location.href(link)
+		return
+	}
 }
 
 

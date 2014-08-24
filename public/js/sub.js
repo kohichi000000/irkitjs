@@ -1,43 +1,47 @@
-function tabSubButton(){
-	$(".subButton").click(function() {
-		switch($(this).attr('class')){
-			case "delete subButton":
-				tabSubButtonDelete(this)
-				break;
-			case "edit subButton":
-				appearButtonEditConsole(this)
-				break;
-			case "sortUp subButton":
-				tabSubButtonSortUp(this)
-				break;
-			case "sortDown subButton":
-				tabSubButtonSortDown(this)
-				break;
+function tabSubButton(e,dom){
+	checkNum = parseInt($(dom).find('button').css("left"))
+	
+	console.log(checkNum)
+
+	if(checkNum < 0){
+		console.log("right button is excuted")
+		if(e > 0 && e < 52){
+		console.log("appearButtonEditConsole is excuted")
+			appearButtonEditConsole(dom)
+		}else if(e > 52 && e < 104){
+			tabSubButtonDelete(dom)
+		}	
+	}else if(checkNum > 0){
+		if(e > 0 && e < 52){
+			tabSubButtonSortUp(dom)
+		}else if(e > 52 && e < 104){
+			tabSubButtonSortDown(dom)
 		}
-	});
+	}
 }
 
 function tabSubButtonDelete(dom){
 	buttonArray = getFromStorage("irkitJsData");
-	targetId 		= $(dom).parent("li").attr("data-button-id");
+	targetId 		= $(dom).attr("data-button-id");
 
 	buttonArray.splice(targetId,1)
 	localStorage.removeItem("irkitJsData")
 	storeToStorageSimple(buttonArray, "irkitJsData")
 	
-	$(dom).parent("li").animate({
+	$(dom).animate({
 		"margin-left": '-50%',
 		"opacity": '0'
 	},
 	define.a, function() {
 		$(this).remove()
+		buttonListPosition()
 	});
 }
 
 function tabSubButtonEdit(dom){
 	buttonArray = getFromStorage("irkitJsData");　	// ボタンデータ配列を取り出し
 	localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
-	targetId 		= $(dom).parent("li").attr("data-button-id");
+	targetId 		= $(dom).attr("data-button-id");
 
 	$("#editButtonName").click(function() {
 		var editButtonNameBodyVal = $("#editButtonNameBody").val();
@@ -81,22 +85,25 @@ function appearButtonEditConsole(dom){
 }
 
 function tabSubButtonSortUp(dom){
+
+	console.log("tabSubButtonSortUp is excuted")
+
 	buttonArray = getFromStorage("irkitJsData");　	// ボタンデータ配列を取り出し
 	localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
-	targetId 		= Number($(dom).parent("li").attr("data-button-id"));
+	targetId 		= Number($(dom).attr("data-button-id"));
 
 	buttonArray[targetId].buttonId 		= targetId + 1 //ボタンデータを更新
 	buttonArray[targetId+1].buttonId 	= targetId //ボタンデータを更新
 
-	current = $(dom).parent("li").css("top")
-	prev 		= $(dom).parent("li").prev("li").css("top")
+	current = $(dom).css("top")
+	prev 		= $(dom).prev("li").css("top")
 
-	$(dom).parent("li").attr('data-button-id', targetId + 1);
-	$(dom).parent("li").prev("li").attr('data-button-id', targetId);
+	$(dom).attr('data-button-id', targetId + 1);
+	$(dom).prev("li").attr('data-button-id', targetId);
 
-	holdItem = $(dom).parent("li").prev("li");
+	holdItem = $(dom).prev("li");
 
-	$(dom).parent("li").animate({
+	$(dom).animate({
 		"top": prev
 	},define.a,function(){
 
@@ -105,7 +112,6 @@ function tabSubButtonSortUp(dom){
 			"top": current
 		}, define.a)
 	});
-
 	buttonIdSort(buttonArray)
 	storeToStorageSimple(buttonArray, "irkitJsData") // 新しいデータを格納
 }
@@ -113,20 +119,20 @@ function tabSubButtonSortUp(dom){
 function tabSubButtonSortDown(dom){
 	buttonArray = getFromStorage("irkitJsData");　// ボタンデータ配列を取り出し
 	localStorage.removeItem("irkitJsData") // 取り出してから一度削除
-	targetId 		= Number($(dom).parent("li").attr("data-button-id"));
+	targetId 		= Number($(dom).attr("data-button-id"));
 
 	buttonArray[targetId].buttonId 		= targetId - 1 //ボタンデータを更新
 	buttonArray[targetId-1].buttonId 	= targetId 		 //ボタンデータを更新
 
-	current = $(dom).parent("li").css("top")
-	next 		= $(dom).parent("li").next("li").css("top")
+	current = $(dom).css("top")
+	next 		= $(dom).next("li").css("top")
 
-	$(dom).parent("li").attr('data-button-id', targetId - 1);
-	$(dom).parent("li").next("li").attr('data-button-id', targetId);
+	$(dom).attr('data-button-id', targetId - 1);
+	$(dom).next("li").attr('data-button-id', targetId);
 
-	holdItem = $(dom).parent("li").next("li");
+	holdItem = $(dom).next("li");
 
-	$(dom).parent("li").animate({
+	$(dom).animate({
 		"top": next
 	},define.a,function(){
 
