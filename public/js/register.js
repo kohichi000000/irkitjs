@@ -29,16 +29,17 @@ function getClientkey(){
 			},
 		})
 		.done(function(e) {
+			console.log("getClientkey is success");
 			storeToStorageSimple($('#getClientKeyBody').val(),"apikey")
 			storeToStorageSimple(e.clientkey,"clientkey")
 			getDeviceId()
 			ajaxGetPage("init.wifi.html")
 		})
 		.fail(function(e) {
-			console.log("error");
+			console.log("getClientkey is error");
 		})
 		.always(function() {
-			console.log("complete");
+			console.log("getClientkey is complete");
 		});
 	});
 }
@@ -55,12 +56,13 @@ function getDeviceId(){
 	.done(function(e) {
 		storeToStorage(e,"devicekey")
 		storeToStorage(e,"deviceid")
+		console.log("getDeviceId is success");
 	})
 	.fail(function(e) {
-		console.log("error");
+		console.log("getDeviceId is error");
 	})
 	.always(function() {
-		console.log("complete");
+		console.log("getDeviceId is complete");
 	});
 }
 
@@ -75,13 +77,13 @@ function getWifiSetting(recieve){
 			},
 		})
 		.done(function(e) {
-			console.log("success")
+			console.log("getWifiSetting is success")
 		})
 		.fail(function(e) {
-			console.log("error");
+			console.log("getWifiSetting is error");
 		})
 		.always(function() {
-			console.log("complete");
+			console.log("getWifiSetting is complete");
 			ajaxGetPage("init.serialize.html")
 		});
 	});

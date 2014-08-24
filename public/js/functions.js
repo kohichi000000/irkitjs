@@ -130,7 +130,6 @@ function ajaxLinkClick(){
 }
 
 function ajaxGetPage(link, outerLink){
-	console.log(outerLink)
 	if(!outerLink){	
 		$.ajax({
 			url: link,
@@ -138,6 +137,7 @@ function ajaxGetPage(link, outerLink){
 			dataType: 'html'
 		})
 		.done(function(e) {
+			console.log(success)
 			checkUrl = this.url
 			$("#contents").children().animate({
 				"margin-left": "-50%",
