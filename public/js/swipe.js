@@ -1,5 +1,6 @@
 function controllerSwiper(){
 	// defPos = 0
+	console.log("controllerSwiper is excuted")
 
 	$(".buttonList").children('li').hammer().on("panleft panright panend tap press", function(ev){
 
@@ -8,7 +9,6 @@ function controllerSwiper(){
 				ajaxPost(getFromStorage("irkitJsData")[$(this).parent().attr('data-button-id')]["buttonData"])
 				break;
 			case("panright"):
-				
 				$(this).find('.sortUp').addClass('active')
 
 				if(ev.gesture.distance > 52){
@@ -16,21 +16,19 @@ function controllerSwiper(){
 					$(this).find('.sortDown').addClass('active')
 				}
 
-				$(this).css('left', ev.gesture.distance + "px");
+				$(this).find("button").css('left', ev.gesture.distance + "px");
 
 				if(ev.gesture.distance > 104){
 					console.log("over 104px")
 					$(this).find('button').css("left", "104px")
 				}
-
 				break;
 			case("panleft"):
 				$(this).find('.edit').addClass('active')
-
-				if(parseInt($(this).css('left')) < 10){
-					$(this).css('left', -ev.gesture.distance + "px")
+				if(parseInt($(this).find("button").css('left')) < 10){
+					$(this).find("button").css('left', -ev.gesture.distance + "px")
 				}else{
-					$(this).css('left', ev.gesture.distance + "px")
+					$(this).find("button").css('left', ev.gesture.distance + "px")
 				}
 
 				if(ev.gesture.distance > 52){
