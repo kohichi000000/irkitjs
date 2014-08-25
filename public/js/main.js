@@ -180,6 +180,7 @@ function ajaxGetPage(link, outerLink){
 						"margin-left": '0',
 						"opacity": '1'
 					},define.a,function(){
+						window.history.pushState(null,null,checkUrl);
 					})
 					if(checkUrl == "home.html"){
 						// initFunction()
