@@ -1,7 +1,6 @@
 function controllerSwiper(){
-	var myElement = $('#myElement').hammer();
-
 	defPos = 0
+
 	$(".buttonList").children('li').hammer().on("panleft panright panend tap press", function(ev){
 		if(ev.type == "tap"){
 			ajaxPost(getFromStorage("irkitJsData")[$(this).parent().attr('data-button-id')]["buttonData"])
