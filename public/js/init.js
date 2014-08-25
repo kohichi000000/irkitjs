@@ -89,7 +89,7 @@ function initFunction(){
 function registerFunction(){
   getAppsKey()
   getClientkey()
-  getWifiSetting()
+  // getWifiSetting()
   selectVisualControll()
   getSerializeKey()
   initContentHeight()

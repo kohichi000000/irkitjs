@@ -89,8 +89,10 @@ function tabSubButtonSortUp(dom){
 	console.log("tabSubButtonSortUp is excuted")
 
 	buttonArray = getFromStorage("irkitJsData");　	// ボタンデータ配列を取り出し
-	localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
 	targetId 		= Number($(dom).attr("data-button-id"));
+	if(buttonArray[targetId+1] == undefined) return false;
+
+	localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
 
 	buttonArray[targetId].buttonId 		= targetId + 1 //ボタンデータを更新
 	buttonArray[targetId+1].buttonId 	= targetId //ボタンデータを更新
@@ -118,8 +120,10 @@ function tabSubButtonSortUp(dom){
 
 function tabSubButtonSortDown(dom){
 	buttonArray = getFromStorage("irkitJsData");　// ボタンデータ配列を取り出し
-	localStorage.removeItem("irkitJsData") // 取り出してから一度削除
 	targetId 		= Number($(dom).attr("data-button-id"));
+	if(buttonArray[targetId-1] == undefined) return false;
+
+	localStorage.removeItem("irkitJsData") // 取り出してから一度削除
 
 	buttonArray[targetId].buttonId 		= targetId - 1 //ボタンデータを更新
 	buttonArray[targetId-1].buttonId 	= targetId 		 //ボタンデータを更新
