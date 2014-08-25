@@ -137,7 +137,7 @@ function ajaxGetPage(link, outerLink){
 			dataType: 'html'
 		})
 		.done(function(e) {
-			console.log(success)
+			console.log("ajaxGetPage is success")
 			checkUrl = this.url
 			$("#contents").children().animate({
 				"margin-left": "-50%",
@@ -168,6 +168,17 @@ function ajaxGetPage(link, outerLink){
 	}
 }
 
+function ajaxGetPageStore(link){
+	$.ajax({
+		url: link,
+		type: 'GET',
+		dataType: 'html'
+	})
+	.done(function(e) {
+		console.log("ajaxGetPageStore is success")
+		return e
+	})
+}
 
 function ajaxGetPageInit(){
 	initVerifyer();
