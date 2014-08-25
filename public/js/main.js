@@ -21,6 +21,8 @@ function ajaxPost(e){
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log(XMLHttpRequest);
+		console.log(textStatus);
+		console.log(errorThrown);
 	});
 }
 
@@ -67,7 +69,7 @@ function appearBottunConsole(){
 
 function ajaxGet() {
 	console.log("ajaxGet is start")
-	$.ajax({
+	var buttonData = $.ajax({
 		type: "GET",
 		url: define.url.messages,
 		async: false,
@@ -80,12 +82,15 @@ function ajaxGet() {
 		timeout: 1000
 	})
 	.done(function(json) {
+		console.log("ajaxGet is success")
 		// addButtonName(json.message)
 		return json.message
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
+	console.log(buttonData.responseText)
+	return buttonData.responseText
 }
 
 function addButtonName(){
@@ -110,6 +115,7 @@ function addButtonName(){
 }
 
 function storeNewButton(button){
+	console.log(button[0])
 	buttonObj = {
 		buttonId: 	buttonArray.length,
 		buttonData: button[0],
@@ -180,7 +186,7 @@ function ajaxGetPage(link, outerLink){
 						"margin-left": '0',
 						"opacity": '1'
 					},define.a,function(){
-						window.history.pushState(null,null,checkUrl);
+						window.history.pushState(null,null,"#" + checkUrl);
 					})
 					if(checkUrl == "home.html"){
 						// initFunction()
@@ -196,15 +202,18 @@ function ajaxGetPage(link, outerLink){
 }
 
 function ajaxGetPageStore(link){
+	var storeHtml = 
 	$.ajax({
 		url: link,
 		type: 'GET',
-		dataType: 'html'
+		dataType: 'html',
+		async: false
 	})
 	.done(function(e) {
 		console.log("ajaxGetPageStore is success")
-		return e
+		return e;
 	})
+	return storeHtml.responseText
 }
 
 function ajaxGetPageInit(){

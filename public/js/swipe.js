@@ -6,7 +6,8 @@ function controllerSwiper(){
 
 		switch(ev.type){
 			case("tap"):
-				ajaxPost(getFromStorage("irkitJsData")[$(this).parent().attr('data-button-id')]["buttonData"])
+				console.log($(this).attr('data-button-id'))
+				ajaxPost(getFromStorage("irkitJsData")[$(this).attr('data-button-id')]["buttonData"])
 				break;
 			case("panright"):
 				$(this).find('.sortUp').addClass('active')
