@@ -34,8 +34,6 @@ function getClientkey(){
 			storeToStorageSimple($('#getClientKeyBody').val(),"apikey")
 			storeToStorageSimple(e.clientkey,"clientkey")
 			getDeviceId()
-		  getWifiSetting(ajaxGetPageStore("init.serialize.html"))
-			ajaxGetPage("init.wifi.html")
 		})
 		.fail(function(e) {
 			console.log("getClientkey is error");
@@ -58,6 +56,8 @@ function getDeviceId(){
 	.done(function(e) {
 		storeToStorage(e,"devicekey")
 		storeToStorage(e,"deviceid")
+	  getWifiSetting(ajaxGetPageStore("init.serialize.html"))
+		ajaxGetPage("init.wifi.html")
 		console.log("getDeviceId is success");
 	})
 	.fail(function(e) {
