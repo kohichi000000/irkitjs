@@ -1,4 +1,5 @@
 function getAppsKey(){
+
 	$('#getAppsKey').click(function(event){
 		$.ajax({
 			url: define.url.apps,
@@ -68,6 +69,7 @@ function getDeviceId(){
 }
 
 function getWifiSetting(recieve){
+	console.log(recieve)
 	$("#wifiSetting").click(function() {
 		$.ajax({
 			url: define.url.clients,
