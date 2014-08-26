@@ -57,7 +57,6 @@ function getDeviceId(){
 		storeToStorage(e,"devicekey")
 		storeToStorage(e,"deviceid")
 		ajaxGetPage("init.wifi.html")
-	  getWifiSetting(ajaxGetPageStore("init.serialize.html"))
 		console.log("getDeviceId is success");
 	})
 	.fail(function(e) {
@@ -86,7 +85,11 @@ function getWifiSetting(recieve){
 				}).animate({
 					"margin-left": '0',
 					"opacity": '1'
-				},define.a)
+				},define.a,
+				function(){
+					registerFunction()
+					console.log("registerFunction is excuted")
+				})
 		});
 		// $.ajax({
 		// 	url: define.url.clients,
@@ -165,7 +168,7 @@ function getSerializeKey(){
 		});
 		postSerializeKey(serialized)
 		ajaxGetPage("init.thanks.html")
-		ajaxLinkClick()
+		initFunction()
 	});
 }
 

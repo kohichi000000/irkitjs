@@ -169,7 +169,7 @@ function ajaxGetPage(link, outerLink){
 			dataType: 'html'
 		})
 		.done(function(e) {
-			console.log("ajaxGetPage is success")
+			console.log(link + " ajaxGetPage is success")
 			checkUrl = this.url
 			$("#contents").children().animate({
 				"margin-left": "-50%",
@@ -191,6 +191,9 @@ function ajaxGetPage(link, outerLink){
 					if(checkUrl == "home.html"){
 						// initFunction()
 					}else if(checkUrl.match(/init./)){
+						if(checkUrl == 'init.wifi.html') {
+						  getWifiSetting(ajaxGetPageStore("init.serialize.html"))
+						}
 						registerFunction()
 					}
 			})
