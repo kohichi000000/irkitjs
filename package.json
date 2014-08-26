@@ -1,5 +1,5 @@
 {
-  "name": "node-static-site",
+  "name": "irkit-js",
   "version": "0.0.1",
   "dependencies": {
     "express": "3.0.5"
