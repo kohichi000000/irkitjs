@@ -3,7 +3,7 @@
  * Node Sever Script 
  */
 
-require('newrelic');
+// require('newrelic');
 
 var express = require('express')
   , http = require('http')
