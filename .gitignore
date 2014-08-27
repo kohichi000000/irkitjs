@@ -1,1 +1,5 @@
-newrelic.js
+*.min.js
+*.js.map
+*.css.map
+!functions.min.js
+!functions.min.js.map
