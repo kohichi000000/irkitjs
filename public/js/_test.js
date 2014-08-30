@@ -1,55 +1,5 @@
-function swipeTest(){
+var test = 
+{"message":{"format":"raw","freq":38,"data":[17421,8755,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,3228,1150,1150,1150,3228,1150,3228,1150,3228,1150,3228,1150,3228,1150,3228,1150,1150,1150,3228,1150,1150,1150,3228,1150,1150,1150,3228,1150,3228,1150,1150,1150,1150,1150,1150,1150,3228,1150,1150,1150,3228,1150,1150,1150,1150,1150,3228,1150,3228,1150,3228,1150,65535,0,13230,17421,4400,1150]},"hostname":"IRKit94B1","deviceid":"2E1A70A3647848AE9D131CDABB1D82E5"} 
 
-	$("#test").children('li').hammer().on("panleft panright panend tap press", function(ev){
-		
-		if(typeof(currentPosition) == "undefined"){
-			currentPosition = 0;
-		}
-
-		switch(ev.type){
-			case("panright"):
-				$(this).css('left', ev.gesture.distance + "px");
-				break;
-			case("panleft"):
-				if(parseInt($(this).css('left')) < 10){
-					$(this).css('left', -ev.gesture.distance + "px")
-				}else{
-					$(this).css('left', ev.gesture.distance + "px")
-				}
-				break;
-			case("panend"):
-				currentPosition = 0;
-				break;
-		}
-		// console.log(currentPosition)
-	})
-}
-
-$(window).load(function() {
-	swipeTest()	
-});
-
-
-// angle: -174.80557109226518
-// center: Object
-// changedPointers: Array[1]
-// deltaTime: 87
-// deltaX: -11
-// deltaY: -1
-// direction: 2
-// distance: 11.045361017187261
-// eventType: 2
-// isFinal: false
-// isFirst: false
-// offsetDirection: 4
-// pointerType: "mouse"
-// pointers: Array[1]
-// rotation: 0
-// scale: 1
-// srcEvent: MouseEvent
-// target: button
-// timeStamp: 1408961728395
-// velocity: 0.1875
-// velocityX: 0.1875
-// velocityY: 0
-// __proto__: Object
+console.log(test)
+console.log(test.message)
