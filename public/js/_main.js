@@ -128,7 +128,8 @@ function storeNewButton(button){
 
 	// $("ul.buttonList").prepend('<li data-button-id="'+ buttonObj.buttonId + '"><button class="remoteControllers">'+ buttonObj.buttonName +'</button><div class="delete subButton"></div><div class="edit subButton"></div><div class="sortUp subButton"></div><div class="sortDown subButton"></div></li>');
 	$("ul.buttonList").children('li').remove()
-	initFunction()
+	// initFunction()
+	location.reload(true)
 }
 
 function storeToStorage(e,key){
@@ -192,7 +193,7 @@ function ajaxGetPage(link, outerLink){
 						// initFunction()
 					}else if(checkUrl.match(/init./)){
 						if(checkUrl == 'init.wifi.html') {
-						  getWifiSetting(ajaxGetPageStore("init.serialize.html"))
+						  getWifiSetting(ajaxGetPageStore("init.serialize.html"),ajaxGetPageStore("init.thanks.html"))
 						}
 						registerFunction()
 					}

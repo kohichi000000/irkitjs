@@ -94,6 +94,7 @@ function registerFunction(){
   getSerializeKey()
   initContentHeight()
   ajaxLinkClick()
+  initThanks()
 }
 
 $(window).load(function() {

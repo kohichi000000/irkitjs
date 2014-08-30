@@ -1,5 +1,4 @@
 function getAppsKey(){
-
 	$('#getAppsKey').click(function(event){
 		$.ajax({
 			url: define.url.apps,
@@ -15,6 +14,7 @@ function getAppsKey(){
 		})
 		.fail(function(e) {
 			console.log(e)
+			localStorage.clear();
 		})
 	});
 }
@@ -37,6 +37,7 @@ function getClientkey(){
 		})
 		.fail(function(e) {
 			console.log("getClientkey is error");
+			localStorage.clear();
 		})
 		.always(function() {
 			console.log("getClientkey is complete");
@@ -61,14 +62,16 @@ function getDeviceId(){
 	})
 	.fail(function(e) {
 		console.log("getDeviceId is error");
+		localStorage.clear();
 	})
 	.always(function() {
 		console.log("getDeviceId is complete");
 	});
 }
 
-function getWifiSetting(recieve){
+function getWifiSetting(recieve,recieveThanks){
 	console.log(recieve)
+	storeToStorage(recieveThanks,"recieveThanks")
 	$("#wifiSetting").click(function() {
 		console.log("getWifiSetting is success")
 		$("#contents").children().animate({
@@ -91,40 +94,6 @@ function getWifiSetting(recieve){
 					console.log("registerFunction is excuted")
 				})
 		});
-		// $.ajax({
-		// 	url: define.url.clients,
-		// 	type: 'POST',
-		// 	dataType: 'json',
-		// 	data: {
-		// 		apikey: getFromStorage("clientkey")
-		// 	},
-		// })
-		// .done(function(e) {
-		// 	console.log("getWifiSetting is success")
-		// 	$("#contents").children().animate({
-		// 		"margin-left": "-50%",
-		// 		"opacity": "0"},
-		// 		define.a,
-		// 		function(){
-		// 			$(this).remove();
-		// 			$("#contents").prepend(recieve)
-		// 			initFunction();
-		// 			$("#contents").children().css({
-		// 				"margin-left": '50%',
-		// 				"opacity": '0'
-		// 			}).animate({
-		// 				"margin-left": '0',
-		// 				"opacity": '1'
-		// 			},define.a)
-		// 	})
-		// })
-		// .fail(function(e) {
-		// 	console.log("getWifiSetting is error");
-		// })
-		// .always(function() {
-		// 	console.log("getWifiSetting is complete");
-		// 	// ajaxGetPage("init.serialize.html")
-		// });
 	});
 }
 
@@ -167,7 +136,30 @@ function getSerializeKey(){
 		    devicekey : getFromStorage("devicekey")
 		});
 		postSerializeKey(serialized)
-		ajaxGetPage("init.thanks.html")
+
+		recieveThanks = getFromStorage("recieveThanks")
+
+		$("#contents").children().animate({
+			"margin-left": "-50%",
+			"opacity": "0"},
+			define.a,
+			function(){
+				$(this).remove();
+				$("#contents").prepend(recieveThanks)
+				initFunction();
+				$("#contents").children().css({
+					"margin-left": '50%',
+					"opacity": '0'
+				}).animate({
+					"margin-left": '0',
+					"opacity": '1'
+				},define.a,
+				function(){
+					registerFunction()
+					console.log("registerFunction is excuted")
+				})
+		});
+		// ajaxGetPage("init.thanks.html")
 		initFunction()
 	});
 }
@@ -181,10 +173,15 @@ function postSerializeKey(e){
 	.done(function() {
 		console.log("success");
 	})
-	.fail(function() {
+	.fail(function(){
+		localStorage.clear();
 		console.log("error");
 	})
 	console.log("ajax is end");
 }
 
-
+function initThanks(){
+	$("#thanks").click(function(){
+		location.reload(true)
+	});
+}
