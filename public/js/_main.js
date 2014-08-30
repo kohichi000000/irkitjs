@@ -188,7 +188,7 @@ function ajaxGetPage(link, outerLink){
 						"margin-left": '0',
 						"opacity": '1'
 					},define.a,function(){
-						window.history.pushState(null,null,"#" + checkUrl);
+						window.history.pushState(null,null,"?ref=#" + checkUrl);
 					})
 					if(checkUrl == "home.html"){
 						// initFunction()
