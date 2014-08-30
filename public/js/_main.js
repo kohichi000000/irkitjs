@@ -92,8 +92,9 @@ function ajaxGet() {
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
-	// console.log(JSON.stringify(buttonData.responseText).message)
-	// return JSON.stringify(buttonData.responseText).message
+	console.log(buttonData)
+	console.log(JSON.stringify(buttonData))
+	return JSON.stringify(buttonData)
 }
 
 function addButtonName(){
