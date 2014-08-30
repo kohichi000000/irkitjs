@@ -72,7 +72,7 @@ function getDeviceId(){
 function getWifiSetting(recieve,recieveThanks){
 	console.log(recieve)
 	console.log(recieveThanks)
-	storeToStorage(recieveThanks,"recieveThanks")
+	storeToStorageSimple(recieveThanks,"recieveThanks")
 	$("#wifiSetting").click(function() {
 		console.log("getWifiSetting is success")
 		$("#contents").children().animate({
