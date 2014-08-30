@@ -70,7 +70,7 @@ function appearBottunConsole(){
 function ajaxGet() {
 	console.log("ajaxGet is start")
 
-	var buttonData = $.ajax({
+	var getButtonData = $.ajax({
 		type: "GET",
 		url: define.url.messages,
 		async: false,
@@ -92,10 +92,16 @@ function ajaxGet() {
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
-	console.log(buttonData.responseText)
-	console.log(buttonData.responseText.message)
-	console.log(buttonData.responseText["message"])
-	return buttonData.responseText.message
+
+	console.log(getButtonData.responseText)
+	console.log(typeof getButtonData.responseText)
+	console.log(getButtonData.responseText.message)
+	console.log(getButtonData.responseText["message"])
+
+	var strToObj = (new Function("return " + getButtonData.responseText))();
+	console.log(strToObj)
+	return strToObj.message // 'aの値'
+	// return getButtonData.responseText.message
 }
 
 function addButtonName(){
