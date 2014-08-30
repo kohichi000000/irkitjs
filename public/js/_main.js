@@ -83,25 +83,15 @@ function ajaxGet() {
 		timeout: 1000
 	})
 	.done(function(json) {
-		console.log(json)
-		console.log(json.message)
 		console.log("ajaxGet is success")
-		// addButtonName(json.message)
 		return json.message
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
 
-	console.log(getButtonData.responseText)
-	console.log(typeof getButtonData.responseText)
-	console.log(getButtonData.responseText.message)
-	console.log(getButtonData.responseText["message"])
-
 	var strToObj = (new Function("return " + getButtonData.responseText))();
-	console.log(strToObj)
 	return strToObj.message // 'aの値'
-	// return getButtonData.responseText.message
 }
 
 function addButtonName(){
