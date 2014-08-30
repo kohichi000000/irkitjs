@@ -70,7 +70,32 @@ function appearBottunConsole(){
 function ajaxGet() {
 	console.log("ajaxGet is start")
 
-	var buttonData = $.ajax({
+	// var buttonData = $.ajax({
+	// 	type: "GET",
+	// 	url: define.url.messages,
+	// 	async: false,
+	// 	data: {
+	// 		clear: 1,
+	// 		clientkey: getFromStorage("clientkey")
+	// 	},
+	// 	cache: false,
+	// 	dataType: "json",
+	// 	timeout: 1000
+	// })
+	// .done(function(json) {
+	// 	console.log(json)
+	// 	console.log(json.message)
+	// 	console.log("ajaxGet is success")
+	// 	// addButtonName(json.message)
+	// 	return json.message
+	// })
+	// .fail(function(XMLHttpRequest, textStatus, errorThrown) {
+	// 	console.log("get is error")
+	// });
+	// console.log(buttonData)
+	// console.log(JSON.stringify(buttonData))
+	// return JSON.stringify(buttonData)
+	$.ajax({
 		type: "GET",
 		url: define.url.messages,
 		async: false,
@@ -92,9 +117,6 @@ function ajaxGet() {
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
-	console.log(buttonData)
-	console.log(JSON.stringify(buttonData))
-	return JSON.stringify(buttonData)
 }
 
 function addButtonName(){
