@@ -40,7 +40,6 @@ function tabSubButtonDelete(dom){
 
 function tabSubButtonEdit(dom){
 	buttonArray = getFromStorage("irkitJsData");　	// ボタンデータ配列を取り出し
-	localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
 	targetId 		= $(dom).attr("data-button-id");
 
 	$("#editButtonName").click(function() {
@@ -60,6 +59,7 @@ function tabSubButtonEdit(dom){
 		}else{
 			console.log("名前を入れて下さい")
 		}
+		localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
 		storeToStorageSimple(buttonArray, "irkitJsData") // 新しいデータを格納
 		$(".buttonList").children('li').remove()
 		initFunction()

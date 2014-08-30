@@ -26,7 +26,8 @@ function controllerSwiper(){
 				break;
 			case("panleft"):
 				$(this).find('.edit').addClass('active')
-				if(parseInt($(this).find("button").css('left')) < 10){
+
+				if(parseInt($(this).find("button").css('left')) <= 0){
 					$(this).find("button").css('left', -ev.gesture.distance + "px")
 				}else{
 					$(this).find("button").css('left', ev.gesture.distance + "px")
