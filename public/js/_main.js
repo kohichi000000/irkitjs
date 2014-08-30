@@ -83,6 +83,8 @@ function ajaxGet() {
 		timeout: 1000
 	})
 	.done(function(json) {
+		console.log(json)
+		console.log(json.message)
 		console.log("ajaxGet is success")
 		// addButtonName(json.message)
 		return json.message
@@ -90,8 +92,8 @@ function ajaxGet() {
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log("get is error")
 	});
-	console.log(buttonData.responseText)
-	return buttonData.responseText
+	console.log(buttonData.responseText.message)
+	return buttonData.responseText.message
 }
 
 function addButtonName(){
