@@ -1,8 +1,7 @@
-//@prepros-append keyserializer.js
-//@prepros-append init.js
-//@prepros-append register.js
-//@prepros-append main.js
-//@prepros-append sub.js
-//@prepros-append functions.js
-//@prepros-append swipe.js
-//@prepros-append analytics.js
+//@prepros-append _keyserializer.js
+//@prepros-append _init.js
+//@prepros-append _register.js
+//@prepros-append _main.js
+//@prepros-append _sub.js
+//@prepros-append _swipe.js
+//@prepros-append _analytics.js
