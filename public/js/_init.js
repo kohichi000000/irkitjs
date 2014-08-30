@@ -80,7 +80,6 @@ function initFunction(){
   if(define.loadCounter == 0){
     ajaxLinkClick();
     addButton();
-    tapButton();
     define.loadCounter++
   }
   initContentHeight()

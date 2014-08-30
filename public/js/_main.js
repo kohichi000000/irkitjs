@@ -1,10 +1,6 @@
-function tapButton(){
-	// $(".remoteControllers").click(function(e) {
-	// 	ajaxPost(getFromStorage("irkitJsData")[$(this).parent().attr('data-button-id')]["buttonData"])
-	// });
-}
-
 function ajaxPost(e){
+	console.log(e)
+
 	$.ajax({
 		type: "POST",
 		url: define.url.messages,
@@ -16,14 +12,18 @@ function ajaxPost(e){
 		cache: false,
 		timeout: 1000
 	})
-	.done(function(json) {
+	.done(function(json){
 		console.log("success");
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
 		console.log(XMLHttpRequest);
 		console.log(textStatus);
 		console.log(errorThrown);
-	});
+		return false;
+	})
+	.complete(function(e){
+		console.log(e)
+	})
 }
 
 function initVerifyer(){
