@@ -14,7 +14,8 @@ var define = {
 		  status:{
 		  	account: 	true,
 		  	data: 		true
-		  }
+		  },
+      loadCounter:0
     };
 
 	buttonArray = [];
@@ -76,12 +77,14 @@ function buttonIdSort(array){
 }
 
 function initFunction(){
-  getAppsKey();
+  if(define.loadCounter == 0){
+    ajaxLinkClick();
+    addButton();
+    tapButton();
+    define.loadCounter++
+  }
   initContentHeight()
-  ajaxLinkClick();
   buttonListMaker()
-  addButton();
-  tapButton();
   dataInitialize();
   controllerSwiper()
 }

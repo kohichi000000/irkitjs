@@ -151,6 +151,7 @@ function deleteFromStorage(key){
 function dataInitialize(){
 	$(".clear").click(function() {
 		localStorage.clear();
+		location.reload(true)
 		return false;
 	});
 }
@@ -222,7 +223,6 @@ function ajaxGetPageStore(link){
 
 function ajaxGetPageInit(){
 	initVerifyer();
-	ajaxLinkClick();
 
 	if(define.status.account == false){
 		if(localStorage.email == undefined){
