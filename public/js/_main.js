@@ -129,8 +129,8 @@ function storeNewButton(button){
 	localStorage.setItem("irkitJsData" , JSON.stringify(buttonArray));
 
 	$("ul.buttonList").children('li').remove()
-	initFunction()
-	// location.reload(true)
+	// initFunction()
+	location.reload(true)
 }
 
 function storeToStorage(e,key){
