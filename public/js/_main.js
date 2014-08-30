@@ -129,7 +129,7 @@ function storeNewButton(button){
 	// $("ul.buttonList").prepend('<li data-button-id="'+ buttonObj.buttonId + '"><button class="remoteControllers">'+ buttonObj.buttonName +'</button><div class="delete subButton"></div><div class="edit subButton"></div><div class="sortUp subButton"></div><div class="sortDown subButton"></div></li>');
 	$("ul.buttonList").children('li').remove()
 	initFunction()
-	// location.reload(true)
+	location.reload(true)
 }
 
 function storeToStorage(e,key){
