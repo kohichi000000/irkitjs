@@ -69,6 +69,7 @@ function appearBottunConsole(){
 
 function ajaxGet() {
 	console.log("ajaxGet is start")
+
 	var buttonData = $.ajax({
 		type: "GET",
 		url: define.url.messages,
@@ -115,6 +116,7 @@ function addButtonName(){
 }
 
 function storeNewButton(button){
+	console.log(button)
 	console.log(button[0])
 	buttonObj = {
 		buttonId: 	buttonArray.length,
@@ -126,10 +128,9 @@ function storeNewButton(button){
 
 	localStorage.setItem("irkitJsData" , JSON.stringify(buttonArray));
 
-	// $("ul.buttonList").prepend('<li data-button-id="'+ buttonObj.buttonId + '"><button class="remoteControllers">'+ buttonObj.buttonName +'</button><div class="delete subButton"></div><div class="edit subButton"></div><div class="sortUp subButton"></div><div class="sortDown subButton"></div></li>');
 	$("ul.buttonList").children('li').remove()
 	initFunction()
-	location.reload(true)
+	// location.reload(true)
 }
 
 function storeToStorage(e,key){
