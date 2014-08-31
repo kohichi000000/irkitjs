@@ -1,13 +1,22 @@
 function controllerSwiper(){
-	// defPos = 0
-	console.log("controllerSwiper is excuted")
 
-	$(".buttonList").children('li').hammer().on("panleft panright panend tap press", function(ev){
+}
 
+function buttonPress_initialize(){
+	$(".buttonList").children('li').hammer().on("panleft panright panend pancancel tap press",function(ev){
+		console.log(this)
+		console.log(ev)
+		console.log(ev.type)
+
+		var buttonId = $(this).attr("data-button-id")
+		var pressTimer;
 		switch(ev.type){
+			case("press"):
+				console.log("press is excuted")
+				break;
 			case("tap"):
-				console.log($(this).attr('data-button-id'))
-				ajaxPost(getFromStorage("irkitJsData")[$(this).attr('data-button-id')]["buttonData"])
+				// clearInterval(pressTimer);
+				ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"])
 				break;
 			case("panright"):
 				$(this).find('.sortUp').addClass('active')
@@ -49,3 +58,21 @@ function controllerSwiper(){
 		}
 	})
 }
+
+// var testTimer;
+
+// function startTimer(){
+// 	testTimer=setInterval(function(){
+// 		繰り返し処理させたいコード
+// 	} , 1000);
+// }
+
+// function stopTimer(){
+// clearInterval(testTimer);
+// }
+
+// 「発火」させたいタイミングで
+// startTimer();
+
+// 「停止」させたいタイミングで
+// stopTimer()；

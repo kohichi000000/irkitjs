@@ -1,6 +1,4 @@
 function ajaxPost(e){
-	console.log(e)
-
 	$.ajax({
 		type: "POST",
 		url: define.url.messages,
@@ -16,14 +14,16 @@ function ajaxPost(e){
 		console.log("success");
 	})
 	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
-		console.log(XMLHttpRequest);
-		console.log(textStatus);
-		console.log(errorThrown);
 		return false;
 	})
 	.complete(function(e){
-		console.log(e)
+		// console.log(e)
 	})
+}
+
+function ajaxPostHold(num){
+	console.log("ajaxPostHold is excuted")
+	ajaxPost(getFromStorage("irkitJsData")[num]["buttonData"])
 }
 
 function initVerifyer(){
@@ -96,7 +96,6 @@ function ajaxGet() {
 
 function addButtonName(){
 	$("#addButtonName").click(function() {
-		// var addButtonNameTextHtml;
 		var addButtonNameBodyVal = $("#addButtonNameBody").val();
 
 		if(addButtonNameBodyVal[0] != undefined){
@@ -116,20 +115,15 @@ function addButtonName(){
 }
 
 function storeNewButton(button){
-	console.log(button)
-	console.log(button[0])
 	buttonObj = {
 		buttonId: 	buttonArray.length,
 		buttonData: button[0],
 		buttonName: button[1]
 	}
-
 	buttonArray.push(buttonObj)
-
 	localStorage.setItem("irkitJsData" , JSON.stringify(buttonArray));
 
 	$("ul.buttonList").children('li').remove()
-	// initFunction()
 	location.reload(true)
 }
 
