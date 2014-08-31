@@ -1,62 +1,88 @@
-function controllerSwiper(){
+function button_init(){
+	var buttonList = $(".buttonList").children('li');
 
+	for (var i = 0; i < buttonList.length; i++) {
+		var buttonObj = new Hammer(buttonList[i]);
+
+		buttonObj.add(
+			new Hammer.Press({
+				// event: 'hold'
+			})
+		)
+		buttonObj.on('panleft panright panend tap hold release', button_devide)
+	};
 }
 
-function buttonPress_initialize(){
-	$(".buttonList").children('li').hammer().on("panleft panright panend pancancel tap press",function(ev){
-		console.log(this)
-		console.log(ev)
-		console.log(ev.type)
+function button_devide(ev){
+	var buttonId = $(ev.target).parent('li').attr('data-button-id')
+	switch(ev.type){
+		case('panleft'):
+			button_excute_panleft(ev, buttonId)
+			break;
+		case('panright'):
+			button_excute_panright(ev, buttonId)
+			break;
+		case('panend'):
+			button_excute_panend(ev, buttonId)
+			break;
+		case('tap'):
+			button_excute_tap(ev, buttonId)
+			break;
+		case('release'):
+			console.log("release is excuted")
+			console.log(ev)
+			break;
+		case('hold'):
+			console.log("hold is excuted")
+			console.log(ev)
+			button_excute_hold(ev, buttonId)
+			break;
+	}
+}
 
-		var buttonId = $(this).attr("data-button-id")
-		var pressTimer;
-		switch(ev.type){
-			case("press"):
-				console.log("press is excuted")
-				break;
-			case("tap"):
-				// clearInterval(pressTimer);
-				ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"])
-				break;
-			case("panright"):
-				$(this).find('.sortUp').addClass('active')
+function button_excute_panleft(ev,buttonId){
+	$(ev.target).parent('li').find('.edit').addClass('active')
 
-				if(ev.gesture.distance > 52){
-					$(this).find('.sortUp').removeClass('active')
-					$(this).find('.sortDown').addClass('active')
-				}
+	if(parseInt($(ev.target).parent('li').find("button").css('left')) <= 0){
+		$(ev.target).parent('li').find("button").css('left', -ev.distance + "px")
+	}else{
+		$(ev.target).parent('li').find("button").css('left', ev.distance + "px")
+	}
 
-				$(this).find("button").css('left', ev.gesture.distance + "px");
+	if(ev.distance > 52){
+		$(ev.target).parent('li').find('.edit').removeClass('active')
+		$(ev.target).parent('li').find('.delete').addClass('active')
+	}
+	if(ev.distance > 104){
+		$(ev.target).parent('li').find('button').css("left", "-104px")
+	}
+}
 
-				if(ev.gesture.distance > 104){
-					console.log("over 104px")
-					$(this).find('button').css("left", "104px")
-				}
-				break;
-			case("panleft"):
-				$(this).find('.edit').addClass('active')
+function button_excute_panright(ev,buttonId){
+	$(ev.target).parent('li').find('.sortUp').addClass('active')
+	$(ev.target).parent('li').find("button").css('left', ev.distance + "px");
 
-				if(parseInt($(this).find("button").css('left')) <= 0){
-					$(this).find("button").css('left', -ev.gesture.distance + "px")
-				}else{
-					$(this).find("button").css('left', ev.gesture.distance + "px")
-				}
+	if(ev.distance > 52){
+		$(ev.target).parent('li').find('.sortUp').removeClass('active')
+		$(ev.target).parent('li').find('.sortDown').addClass('active')
+	}
 
-				if(ev.gesture.distance > 52){
-					$(this).find('.edit').removeClass('active')
-					$(this).find('.delete').addClass('active')
-				}
+	if(ev.distance > 104){
+		$(ev.target).parent('li').find('button').css("left", "104px")
+	}
+}
 
-				if(ev.gesture.distance > 104){
-					$(this).find('button').css("left", "-104px")
-				}
-				break;
-			case("panend"):
-				$(this).find('button').animate({"left": "0px"}, define.a)
-				tabSubButton(ev.gesture.distance , this)
-				break;
-		}
-	})
+function button_excute_panend(ev,buttonId){
+	$(ev.target).parent('li').find('button').animate({"left": "0px"}, define.a)
+	tabSubButton(ev.distance , $(ev.target).parent('li'))
+}
+
+function button_excute_tap(ev,buttonId){
+	ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"])
+}
+
+function button_excute_hold(ev,buttonId){
+
 }
 
 // var testTimer;

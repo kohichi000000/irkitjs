@@ -88,14 +88,12 @@ function initFunction(){
   initContentHeight()
   buttonListMaker()
   dataInitialize();
-  // controllerSwiper()
-  buttonPress_initialize()
+  button_init()
 }
 
 function registerFunction(){
   getAppsKey()
   getClientkey()
-  // getWifiSetting()
   selectVisualControll()
   getSerializeKey()
   initContentHeight()
