@@ -6,10 +6,10 @@ function button_init(){
 
 		buttonObj.add(
 			new Hammer.Press({
-				// event: 'hold'
+				event: 'touchend'
 			})
 		)
-		buttonObj.on('panleft panright panend tap hold release', button_devide)
+		buttonObj.on('panleft panright panend tap press pressup touchend release', button_devide)
 	};
 }
 
@@ -28,14 +28,15 @@ function button_devide(ev){
 		case('tap'):
 			button_excute_tap(ev, buttonId)
 			break;
-		case('release'):
-			console.log("release is excuted")
-			console.log(ev)
-			break;
-		case('hold'):
-			console.log("hold is excuted")
+		case('press'):
+			console.log("press is excuted")
 			console.log(ev)
 			button_excute_hold(ev, buttonId)
+			break;
+		case('pressup'):
+			console.log("pressup is excuted")
+			console.log(ev)
+			button_stop_hold();
 			break;
 	}
 }
@@ -82,21 +83,16 @@ function button_excute_tap(ev,buttonId){
 }
 
 function button_excute_hold(ev,buttonId){
+	button_hold_timer=setInterval(function(){
+		button_excute_tap(ev,buttonId);
+	},define.a*5);
+}
 
+function button_stop_hold(){
+	clearInterval(button_hold_timer);
 }
 
 // var testTimer;
-
-// function startTimer(){
-// 	testTimer=setInterval(function(){
-// 		繰り返し処理させたいコード
-// 	} , 1000);
-// }
-
-// function stopTimer(){
-// clearInterval(testTimer);
-// }
-
 // 「発火」させたいタイミングで
 // startTimer();
 
