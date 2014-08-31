@@ -6,10 +6,10 @@ function button_init(){
 
 		buttonObj.add(
 			new Hammer.Press({
-				// event: 'hold'
+				event: 'touchend'
 			})
 		)
-		buttonObj.on('panleft panright panend tap hold release', button_devide)
+		buttonObj.on('panleft panright panend tap press pressup touchend release', button_devide)
 	};
 }
 
@@ -28,14 +28,14 @@ function button_devide(ev){
 		case('tap'):
 			button_excute_tap(ev, buttonId)
 			break;
-		case('release'):
-			console.log("release is excuted")
-			console.log(ev)
-			break;
-		case('hold'):
-			console.log("hold is excuted")
+		case('press'):
+			console.log("press is excuted")
 			console.log(ev)
 			button_excute_hold(ev, buttonId)
+			break;
+		case('pressup'):
+			console.log("pressup is excuted")
+			console.log(ev)
 			break;
 	}
 }
