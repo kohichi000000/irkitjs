@@ -3,7 +3,6 @@ var define = {
       h: function(){ return $(window).height() },
       s: function(){ return $(document).scrollTop() },
       b: 480,
-      // a: 1000,
       a: 200,
       url:{
       	messages: "https://api.getirkit.com/1/messages",
@@ -61,7 +60,11 @@ function buttonListPosition(){
   buttonListArrayHeight = buttonListArray.height()
 
   for (var i = 0; i < buttonListArray.length; i++) {
-    $(buttonListArray[i]).animate({"top": buttonListArrayHeight * i}, 0)
+    $(buttonListArray[i]).animate({
+      "top": buttonListArrayHeight * i
+    }, 0).find('button').css({
+      "left": "0px"
+    })
   };
 }
 
@@ -85,13 +88,12 @@ function initFunction(){
   initContentHeight()
   buttonListMaker()
   dataInitialize();
-  controllerSwiper()
+  button_init()
 }
 
 function registerFunction(){
   getAppsKey()
   getClientkey()
-  // getWifiSetting()
   selectVisualControll()
   getSerializeKey()
   initContentHeight()

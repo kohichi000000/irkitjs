@@ -5,3 +5,4 @@
 //@prepros-append _sub.js
 //@prepros-append _swipe.js
 //@prepros-append _analytics.js
+//@prepros-append _test.js

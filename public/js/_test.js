@@ -1,5 +1,29 @@
-var test = 
-{"message":{"format":"raw","freq":38,"data":[17421,8755,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,1150,3228,1150,1150,1150,3228,1150,3228,1150,3228,1150,3228,1150,3228,1150,3228,1150,1150,1150,3228,1150,1150,1150,3228,1150,1150,1150,3228,1150,3228,1150,1150,1150,1150,1150,1150,1150,3228,1150,1150,1150,3228,1150,1150,1150,1150,1150,3228,1150,3228,1150,3228,1150,65535,0,13230,17421,4400,1150]},"hostname":"IRKit94B1","deviceid":"2E1A70A3647848AE9D131CDABB1D82E5"} 
+// function buttonPress_initialize(){
+// var myElement = $(".buttonList").children('li')[0];
+// var mc = new Hammer(myElement);
 
-console.log(test)
-console.log(test.message)
+// console.log(myElement)
+// console.log(mc)
+
+// mc.add(
+// 	new Hammer.Press({
+// 		event: 'release',
+// 		threshold:2000
+// 	})
+// )
+
+// console.log(mc)
+// console.log(mc.options)
+
+// // mc.on("press panend release", buttonPress);
+// // mc.on("quadrupletap", handleTaps);
+// }
+
+function buttonPress(e){
+	console.log(e.type)
+	console.log("buttonPress is excuted")
+	if(e.type == 'release'){
+		console.log(e.type)
+		console.log("buttonPress is released")
+	}
+}
