@@ -1,31 +1,3 @@
-function ajaxPost(e){
-	$.ajax({
-		type: "POST",
-		url: define.url.messages,
-		data: {
-			clientkey: getFromStorage("clientkey"),
-			deviceid: getFromStorage("deviceid"),
-			message: JSON.stringify(e)
-		},
-		cache: false,
-		timeout: 1000
-	})
-	.done(function(json){
-		console.log("success");
-	})
-	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
-		return false;
-	})
-	.complete(function(e){
-		// console.log(e)
-	})
-}
-
-function ajaxPostHold(num){
-	console.log("ajaxPostHold is excuted")
-	ajaxPost(getFromStorage("irkitJsData")[num]["buttonData"])
-}
-
 function initVerifyer(){
 	if(localStorage.email == undefined || localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined){
 		define.status.account = false;

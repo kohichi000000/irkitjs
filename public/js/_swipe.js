@@ -47,7 +47,7 @@ function button_swipe(ev,list){
 			if(!excutFlag){
 				buttonId = Number($(buttonList[i]).attr('data-button-id'));
 
-				ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"])
+				ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"],ev)
 				var excutFlag = true;
 			}
 		}
@@ -120,7 +120,8 @@ function button_excute_panend(ev,buttonId){
 }
 
 function button_excute_tap(ev,buttonId){
-	ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"])
+	ajaxPostPre(ev);
+	ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"],ev);
 }
 
 function button_excute_hold(ev,buttonId){
