@@ -164,6 +164,19 @@ $anim: 0.3s
   @keyframes #{$name}
     @content
 
++keyframes(rotate)
+  0%
+    +rotate(0deg)
+  100%
+    +rotate(360deg)
+
++keyframes(stop)
+  0%
+    +rotate(0deg)
+  100%
+    +rotate(0deg)
+
+
 =keyFramesAttr($name,$sec,$infinite)
   -webkit-animation: $name $sec $infinite
   -moz-animation: $name $sec $infinite

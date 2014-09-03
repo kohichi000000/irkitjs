@@ -40,6 +40,7 @@ function buttonListMaker(){
       .prepend('
         <li data-button-id="'+ i +'">
           <button class="remoteControllers">' + buttonArray[i]["buttonName"] + '</button>
+          <div class="checkmark"></div>
           <div class="delete subButton"></div>
           <div class="edit subButton"></div>
           <div class="sortUp subButton"></div>

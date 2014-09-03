@@ -77,3 +77,21 @@ ul.buttonList
 		left: 52px
 		&:after
 			content: "\e724"
+.checkmark
+	position: absolute
+	z-index: 11
+	top: 16px
+	right: 20px
+	+icoMoon("\e8cb")
+	&:after
+		font-size: 18px
+		color: #aaa
+		+experimental(animation-timing-function, swing)
+		+keyFramesAttr(rotate, 6.0s, infinite)
+	&.active
+		&:after
+			content: "\e6fe"
+			+rotate(0deg)
+			+keyFramesAttr(stop, 0s, infinite)
+			color: #55C3B8
+
