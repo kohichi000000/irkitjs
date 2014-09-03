@@ -1,5 +1,7 @@
 function button_init(){
+	var buttonParent = $(".buttonList");
 	var buttonList = $(".buttonList").children('li');
+	var buttonPos = button_swipe_makedata();
 
 	for (var i = 0; i < buttonList.length; i++) {
 		var buttonObj = new Hammer(buttonList[i]);
@@ -9,22 +11,52 @@ function button_init(){
 				event: 'touchend'
 			})
 		)
-		buttonObj.on('panleft panright panend tap press pressup touchend release', button_devide)
+		buttonObj.on('panleft panright panend tap press pressup touchend', button_devide)
+	};
+
+	buttonParentObj = new Hammer(buttonParent[0]);
+	buttonParentObj.add(
+		new Hammer.Pan({
+			direction: Hammer.DIRECTION_VERTICAL,
+			threshold:1
+		})
+	)
+	buttonParentObj.on('pandown panup' , function(ev){
+		button_swipe(ev,buttonPos)
+	})
+}
+
+function button_swipe_makedata(){
+	var buttonList  = $(".buttonList").children('li');
+	var buttonPos 	= [];
+
+	for (var i = 0; i < buttonList.length; i++) {
+		var buttonPosTaget = $(buttonList[i]).offset().top - $("header").height();
+		var buttonPosParce = [buttonPosTaget,buttonPosTaget + ($(buttonList[i]).height() - 1)]
+		buttonPos.push(buttonPosParce)
+	};
+	return buttonPos;
+}
+
+function button_swipe(ev,list){
+	var buttonList  = $(".buttonList").children('li');
+	var targetPos 	= ev.center.y - $("header").height();
+
+	for (var i = 0; i < list.length; i++){
+		if(list[i][0] < targetPos && list[i][1] > targetPos){
+			if(!excutFlag){
+				buttonId = Number($(buttonList[i]).attr('data-button-id'));
+
+				ajaxPost(getFromStorage("irkitJsData")[buttonId]["buttonData"])
+				var excutFlag = true;
+			}
+		}
 	};
 }
 
 function button_devide(ev){
 	var buttonId = $(ev.target).parent('li').attr('data-button-id')
 	switch(ev.type){
-		case('panleft'):
-			button_excute_panleft(ev, buttonId)
-			break;
-		case('panright'):
-			button_excute_panright(ev, buttonId)
-			break;
-		case('panend'):
-			button_excute_panend(ev, buttonId)
-			break;
 		case('tap'):
 			button_excute_tap(ev, buttonId)
 			break;
@@ -37,6 +69,15 @@ function button_devide(ev){
 			console.log("pressup is excuted")
 			console.log(ev)
 			button_stop_hold();
+			break;
+		case('panleft'):
+			button_excute_panleft(ev, buttonId)
+			break;
+		case('panright'):
+			button_excute_panright(ev, buttonId)
+			break;
+		case('panend'):
+			button_excute_panend(ev, buttonId)
 			break;
 	}
 }
@@ -91,10 +132,3 @@ function button_excute_hold(ev,buttonId){
 function button_stop_hold(){
 	clearInterval(button_hold_timer);
 }
-
-// var testTimer;
-// 「発火」させたいタイミングで
-// startTimer();
-
-// 「停止」させたいタイミングで
-// stopTimer()；
