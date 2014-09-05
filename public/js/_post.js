@@ -15,7 +15,6 @@ function ajaxPost(e,ev){
 			$(ev.target).find(".checkmark").addClass('active').animate({
 				"opacity": 0
 			}, define.a*4, function(){
-				console.log(this)
 				$(this).remove();
 			})
 		},define.a*2)

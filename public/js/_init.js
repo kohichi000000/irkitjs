@@ -82,14 +82,15 @@ function buttonIdSort(array){
 
 function initFunction(){
   if(define.loadCounter == 0){
-    ajaxLinkClick();
     addButton();
     define.loadCounter++
   }
+  ajaxLinkClick();
   initContentHeight();
   buttonListMaker();
   dataInitialize();
   button_init();
+  add_device_init();
 }
 
 function registerFunction(){

@@ -124,7 +124,7 @@ function dataInitialize(){
 }
 
 function ajaxLinkClick(){
-	$("a").click(function(e) {
+	$("a").off().click(function(e) {
 		ajaxGetPage($(this).attr('href'), $(this).hasClass('outerLink'))
 		return false;
 	});
