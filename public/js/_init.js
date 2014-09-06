@@ -8,7 +8,8 @@ var define = {
       	messages: "https://api.getirkit.com/1/messages",
 				clients: 	"https://api.getirkit.com/1/clients",
 				apps: 		"https://api.getirkit.com/1/apps",
-				devices: 	"https://api.getirkit.com/1/devices"
+        devices:  "https://api.getirkit.com/1/devices",
+				door: 	  "https://api.getirkit.com/1/door"
       },
 		  status:{
 		  	account: 	true,
@@ -91,6 +92,7 @@ function initFunction(){
   dataInitialize();
   button_init();
   add_device_init();
+  clickOpener();
 }
 
 function registerFunction(){
@@ -101,6 +103,8 @@ function registerFunction(){
   initContentHeight();
   ajaxLinkClick();
   initThanks();
+  add_device_getDeviceId();
+  clickOpener();
 }
 
 $(window).load(function() {

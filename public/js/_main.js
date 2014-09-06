@@ -1,6 +1,11 @@
 function initVerifyer(){
 	if(localStorage.email == undefined || localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined){
 		define.status.account = false;
+		console.log("status check is false")
+	}
+	if(localStorage.addDeviceFlag == "true"){
+		define.status.account = true;
+		console.log("localStorage.addDeviceFlag is true")
 	};
 	if(!localStorage.irkitJsData) define.status.data = false;
 }

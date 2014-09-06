@@ -4,4 +4,10 @@
 		メールアドレスを入力して下さい。			
 	%input{:type => "email", :id => "getAppsKeyBody", :placeholder=>"メールアドレスを入力して下さい"}/
 	%button{:type => "button", :id => "getAppsKey"} メールを送信する	
-	%button{:type => "button", :id => "addOtherDevice"} デバイスを追加する
+	#addOtherDeviceWrap
+		%p.clickOpener<
+			既に他のデバイスにIRKitjsを登録済みですか？
+		.clickOpenerBody
+			%p<
+				登録済みのデバイスでclientkeyを取得してから、下のボタンをタップして下さい。	
+			%a{:href => "init.add_device.register.html", :id => "addOtherDevice", :class=>"button"} デバイスを追加する
