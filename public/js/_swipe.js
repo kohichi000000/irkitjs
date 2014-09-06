@@ -14,16 +14,18 @@ function button_init(){
 		buttonObj.on('panleft panright panend tap press pressup touchend', button_devide)
 	};
 
-	buttonParentObj = new Hammer(buttonParent[0]);
-	buttonParentObj.add(
-		new Hammer.Pan({
-			direction: Hammer.DIRECTION_VERTICAL,
-			threshold:1
+	if(buttonParent[0] != undefined){
+		var buttonParentObj = new Hammer(buttonParent[0]);
+		buttonParentObj.add(
+			new Hammer.Pan({
+				direction: Hammer.DIRECTION_VERTICAL,
+				threshold:1
+			})
+		)
+		buttonParentObj.on('pandown panup' , function(ev){
+			button_swipe(ev,buttonPos)
 		})
-	)
-	buttonParentObj.on('pandown panup' , function(ev){
-		button_swipe(ev,buttonPos)
-	})
+	}
 }
 
 function button_swipe_makedata(){

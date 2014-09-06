@@ -171,7 +171,8 @@ function postSerializeKey(e){
 		type: 'POST',
 		data: e,
 	})
-	.done(function() {
+	.done(function(door) {
+		storeToStorageSimple(door,"hostname");
 		console.log("success");
 	})
 	.fail(function(){

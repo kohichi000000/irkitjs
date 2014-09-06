@@ -149,3 +149,9 @@ function tabSubButtonSortDown(dom){
 	buttonIdSort(buttonArray)
 	storeToStorageSimple(buttonArray, "irkitJsData") // 新しいデータを格納
 }
+
+function clickOpener(){
+	$(".clickOpener").click(function() {
+		$(this).next(".clickOpenerBody").toggle(define.a);
+	});
+}
