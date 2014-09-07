@@ -11,21 +11,21 @@ function button_init(){
 				event: 'touchend'
 			})
 		)
-		buttonObj.on('panleft panright panend tap press pressup touchend', button_devide)
+		buttonObj.on('panup pandown panleft panright panend tap press pressup touchend', button_devide)
 	};
 
-	if(buttonParent[0] != undefined){
-		var buttonParentObj = new Hammer(buttonParent[0]);
-		buttonParentObj.add(
-			new Hammer.Pan({
-				direction: Hammer.DIRECTION_VERTICAL,
-				threshold:1
-			})
-		)
-		buttonParentObj.on('pandown panup' , function(ev){
-			button_swipe(ev,buttonPos)
-		})
-	}
+	// if(buttonParent[0] != undefined){
+	// 	var buttonParentObj = new Hammer(buttonParent[0]);
+	// 	buttonParentObj.add(
+	// 		new Hammer.Pan({
+	// 			direction: Hammer.DIRECTION_VERTICAL,
+	// 			threshold:1
+	// 		})
+	// 	)
+	// 	buttonParentObj.on('pandown panup' , function(ev){
+	// 		button_swipe(ev,buttonPos)
+	// 	})
+	// }
 }
 
 function button_swipe_makedata(){
@@ -59,6 +59,14 @@ function button_swipe(ev,list){
 function button_devide(ev){
 	var buttonId = $(ev.target).parent('li').attr('data-button-id')
 	switch(ev.type){
+		case('panup'):
+			console.log("panup")
+			return false;
+			break;
+		case('pandown'):
+			console.log("pandown")
+			return false;
+			break;
 		case('tap'):
 			button_excute_tap(ev, buttonId)
 			break;
