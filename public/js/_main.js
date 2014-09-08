@@ -1,34 +1,11 @@
-function ajaxPost(e){
-	$.ajax({
-		type: "POST",
-		url: define.url.messages,
-		data: {
-			clientkey: getFromStorage("clientkey"),
-			deviceid: getFromStorage("deviceid"),
-			message: JSON.stringify(e)
-		},
-		cache: false,
-		timeout: 1000
-	})
-	.done(function(json){
-		console.log("success");
-	})
-	.fail(function(XMLHttpRequest, textStatus, errorThrown) {
-		return false;
-	})
-	.complete(function(e){
-		// console.log(e)
-	})
-}
-
-function ajaxPostHold(num){
-	console.log("ajaxPostHold is excuted")
-	ajaxPost(getFromStorage("irkitJsData")[num]["buttonData"])
-}
-
 function initVerifyer(){
 	if(localStorage.email == undefined || localStorage.clientkey == undefined || localStorage.deviceid == undefined || localStorage.devicekey == undefined){
 		define.status.account = false;
+		console.log("status check is false")
+	}
+	if(localStorage.addDeviceFlag == "true"){
+		define.status.account = true;
+		console.log("localStorage.addDeviceFlag is true")
 	};
 	if(!localStorage.irkitJsData) define.status.data = false;
 }
@@ -152,7 +129,7 @@ function dataInitialize(){
 }
 
 function ajaxLinkClick(){
-	$("a").click(function(e) {
+	$("a").off().click(function(e) {
 		ajaxGetPage($(this).attr('href'), $(this).hasClass('outerLink'))
 		return false;
 	});
@@ -183,7 +160,7 @@ function ajaxGetPage(link, outerLink){
 						"margin-left": '0',
 						"opacity": '1'
 					},define.a,function(){
-						window.history.pushState(null,null,"?ref=#" + checkUrl);
+						window.history.pushState(null,null,"?ref=" + checkUrl);
 					})
 					if(checkUrl == "home.html"){
 						// initFunction()

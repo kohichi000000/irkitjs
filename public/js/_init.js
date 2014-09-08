@@ -8,7 +8,8 @@ var define = {
       	messages: "https://api.getirkit.com/1/messages",
 				clients: 	"https://api.getirkit.com/1/clients",
 				apps: 		"https://api.getirkit.com/1/apps",
-				devices: 	"https://api.getirkit.com/1/devices"
+        devices:  "https://api.getirkit.com/1/devices",
+				door: 	  "https://api.getirkit.com/1/door"
       },
 		  status:{
 		  	account: 	true,
@@ -55,7 +56,7 @@ function buttonListMaker(){
   }
 }
 
-function buttonListPosition(){
+function buttonListPosition(buttonInit){
   buttonListArray       = $("ul.buttonList").children('li')
   buttonListArrayHeight = buttonListArray.height()
 
@@ -66,6 +67,7 @@ function buttonListPosition(){
       "left": "0px"
     })
   };
+  $("ul.buttonList").height(buttonListArray.length * buttonListArrayHeight);
 }
 
 function buttonIdSort(array){
@@ -81,24 +83,28 @@ function buttonIdSort(array){
 
 function initFunction(){
   if(define.loadCounter == 0){
-    ajaxLinkClick();
     addButton();
     define.loadCounter++
   }
-  initContentHeight()
-  buttonListMaker()
+  ajaxLinkClick();
+  initContentHeight();
+  buttonListMaker();
   dataInitialize();
-  button_init()
+  button_init();
+  add_device_init();
+  clickOpener();
 }
 
 function registerFunction(){
-  getAppsKey()
-  getClientkey()
-  selectVisualControll()
-  getSerializeKey()
-  initContentHeight()
-  ajaxLinkClick()
-  initThanks()
+  getAppsKey();
+  getClientkey();
+  selectVisualControll();
+  getSerializeKey();
+  initContentHeight();
+  ajaxLinkClick();
+  initThanks();
+  add_device_getDeviceId();
+  clickOpener();
 }
 
 $(window).load(function() {
