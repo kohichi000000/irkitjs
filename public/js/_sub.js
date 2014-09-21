@@ -43,6 +43,7 @@ function tabSubButtonEdit(dom){
 	targetId 		= $(dom).attr("data-button-id");
 
 	$("#editButtonName").click(function() {
+		console.log("editButtonName is clicked!")
 		var editButtonNameBodyVal = $("#editButtonNameBody").val();
 
 		if(editButtonNameBodyVal[0] != undefined){
