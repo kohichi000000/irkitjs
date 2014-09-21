@@ -1,4 +1,15 @@
 button
+	&#deleteButton
+		background-color: #d30
+		+icoMoon("\e6fd")
+		width: auto
+		margin: auto
+		position: relative
+		padding-left: 26px
+		&:after
+			position: absolute
+			top: 14px
+			left: 10px
 	&.remoteControllers
 		background-color: #FFF
 		+background-image(linear-gradient(to bottom, white, #f9f9f9))
@@ -94,4 +105,6 @@ ul.buttonList
 			+rotate(0deg)
 			+keyFramesAttr(stop, 1s, 1)
 			color: #55C3B8
-
+.deleteButtonWrap
+	text-align: center
+	margin-top: 20px

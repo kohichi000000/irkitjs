@@ -9,4 +9,3 @@
 //@prepros-append _swipe.js
 //@prepros-append _analytics.js
 //@prepros-append _add_device.js
-//@prepros-append _test.js
