@@ -3,3 +3,4 @@
 *.css.map
 !functions.min.js
 !functions.min.js.map
+node_modules
