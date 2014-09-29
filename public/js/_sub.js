@@ -20,13 +20,22 @@ function tabSubButton(e,dom){
 	}
 }
 
-function tabSubButtonDelete(dom){
+function tabSubButtonDelete(e){
+	var dom = e.data.dom;
 	buttonArray = getFromStorage("irkitJsData");
 	targetId 		= $(dom).attr("data-button-id");
 
 	buttonArray.splice(targetId,1)
 	localStorage.removeItem("irkitJsData")
 	storeToStorageSimple(buttonArray, "irkitJsData")
+
+	$("#editButtonName").off();
+	$("#editButtonNameConsole").hide(0, function() {
+		$(this).remove()
+	});
+	$(".appearButtonShadow").hide(0, function() {
+		$(this).remove()
+	});
 	
 	$(dom).animate({
 		"margin-left": '-50%',
@@ -36,12 +45,17 @@ function tabSubButtonDelete(dom){
 		$(this).remove()
 		buttonListPosition()
 	});
+	$("#deleteButton").off('click',tabSubButtonDelete);
+	initFunction();
 }
 
 function tabSubButtonEdit(dom){
 	buttonArray = getFromStorage("irkitJsData");　	// ボタンデータ配列を取り出し
 	targetId 		= $(dom).attr("data-button-id");
-
+	var data = {
+		dom:dom
+	}
+	$("#deleteButton").on('click',data,tabSubButtonDelete);
 	$("#editButtonName").click(function() {
 		var editButtonNameBodyVal = $("#editButtonNameBody").val();
 
@@ -62,13 +76,14 @@ function tabSubButtonEdit(dom){
 		localStorage.removeItem("irkitJsData") 				// 取り出してから一度削除
 		storeToStorageSimple(buttonArray, "irkitJsData") // 新しいデータを格納
 		$(".buttonList").children('li').remove()
-		initFunction()
+		initFunction();
 	});
 
 }
 
 
 function appearButtonEditConsole(dom){
+	console.log("appearButtonEditConsole is excuted!")
 	$.ajax({
 		url: 'edit.html',
 		type: 'GET',

@@ -1,31 +1,20 @@
 function button_init(){
-	var buttonParent = $(".buttonList");
-	var buttonList = $(".buttonList").children('li');
-	var buttonPos = button_swipe_makedata();
+	var buttonParent 	= $(".buttonList");
+	var buttonList 		= $(".buttonList").children('li');
+	var buttonPos 		= button_swipe_makedata();
+	var doubleTapped 	= false;
 
 	for (var i = 0; i < buttonList.length; i++) {
 		var buttonObj = new Hammer(buttonList[i]);
-
 		buttonObj.add(
 			new Hammer.Press({
 				event: 'touchend'
 			})
 		)
-		buttonObj.on('panup pandown panleft panright panend tap press pressup touchend', button_devide)
+		buttonObj.on('tap doubletap',button_tap_devide)
+		buttonObj.on('panup pandown panleft panright panend', button_swipe_devide)
+		buttonObj.on('press pressup', button_press_devide)
 	};
-
-	// if(buttonParent[0] != undefined){
-	// 	var buttonParentObj = new Hammer(buttonParent[0]);
-	// 	buttonParentObj.add(
-	// 		new Hammer.Pan({
-	// 			direction: Hammer.DIRECTION_VERTICAL,
-	// 			threshold:1
-	// 		})
-	// 	)
-	// 	buttonParentObj.on('pandown panup' , function(ev){
-	// 		button_swipe(ev,buttonPos)
-	// 	})
-	// }
 }
 
 function button_swipe_makedata(){
@@ -56,7 +45,7 @@ function button_swipe(ev,list){
 	};
 }
 
-function button_devide(ev){
+function button_swipe_devide(ev){
 	var buttonId = $(ev.target).parent('li').attr('data-button-id')
 	switch(ev.type){
 		case('panup'):
@@ -67,24 +56,11 @@ function button_devide(ev){
 			console.log("pandown")
 			return false;
 			break;
-		case('tap'):
-			button_excute_tap(ev, buttonId)
-			break;
-		case('press'):
-			console.log("press is excuted")
-			console.log(ev)
-			button_excute_hold(ev, buttonId)
-			break;
-		case('pressup'):
-			console.log("pressup is excuted")
-			console.log(ev)
-			button_stop_hold();
-			break;
 		case('panleft'):
-			button_excute_panleft(ev, buttonId)
+			// button_excute_panleft(ev, buttonId)
 			break;
 		case('panright'):
-			button_excute_panright(ev, buttonId)
+			// button_excute_panright(ev, buttonId)
 			break;
 		case('panend'):
 			button_excute_panend(ev, buttonId)
